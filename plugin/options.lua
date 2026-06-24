@@ -1,4 +1,3 @@
-vim.g.python3_host_prog = "/usr/bin/python3"                        -- Command to start Python 3 (executable, not directory). Setting this makes startup faster.
 vim.opt.wrap = false                                                -- Changes how text is displayed to not wrap
 vim.opt.binary = true                                               -- This option should be set before editing a binary file
 vim.opt.title = true                                                -- When on, the title of the window will be set to the value of 'titlestring' (if it is not empty), or to: filename [+=-] (path) - NVIM
