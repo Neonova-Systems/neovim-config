@@ -1,8 +1,8 @@
 vim.opt.wrap = false                                                -- Changes how text is displayed to not wrap
 vim.opt.binary = true                                               -- This option should be set before editing a binary file
 vim.opt.title = true                                                -- When on, the title of the window will be set to the value of 'titlestring' (if it is not empty), or to: filename [+=-] (path) - NVIM
-vim.opt.number = false                                               -- Enable line numbers
-vim.opt.relativenumber = false                                       -- Enable relative line numbers
+vim.opt.number = true                                               -- Enable line numbers
+vim.opt.relativenumber = true                                       -- Enable relative line numbers
 vim.opt.tabstop = 4                                                 -- Number of spaces that a <Tab> in the file counts for.
 vim.opt.softtabstop = 4                                             -- Number of spaces that a <Tab> counts for while performing editing operations.
 vim.opt.shiftwidth = 4                                              -- Number of spaces to use for each step of (auto)indent.
@@ -22,11 +22,12 @@ vim.opt.smartcase = true                                            -- Enable sm
 vim.opt.ignorecase = true                                           -- Set to always case-insensitive
 vim.opt.hlsearch = true                                             -- When there is a previous search pattern, highlight all its matches
 vim.opt.incsearch = true                                            -- Search for strings incrementally
+vim.opt.inccommand = "split"                                        -- Show the effects of :substitute, :smagic, :snomagic and user commands with the :command-preview feature enabled as you type.
 vim.opt.cursorline = true                                           -- Highlight the screen line of the cursor
 vim.opt.shell = "/usr/bin/zsh"                                      -- Name of the shell to use for ! and :! commands.
-vim.opt.signcolumn = "auto:1-2"                                     -- Enable the signcolumn always
+vim.opt.signcolumn = "yes"                                          -- Enable the signcolumn always
 vim.opt.splitbelow = true                                           -- When on, splitting a window will put the new window below the current one.
--- vim.opt.colorcolumn = "72"                                          -- 'colorcolumn' is a comma-separated list of screen columns that are highlighted with ColorColumn hl-ColorColumn.
+vim.opt.colorcolumn = "0"                                          -- 'colorcolumn' is a comma-separated list of screen columns that are highlighted with ColorColumn hl-ColorColumn.
 vim.opt.splitright = true                                           -- When on, splitting a window will put the new window right of the current one.
 vim.opt.mouse = "a"                                                 -- Enable mouse support, a=all-modes
 vim.opt.mousemodel = "extend"                                       -- Sets the model to use for the mouse.
@@ -37,11 +38,11 @@ vim.opt.cmdheight = 0                                               -- Number of
 vim.opt.updatetime = 200                                            -- If this many milliseconds nothing is typed the swap file will be written to disk.
 vim.opt.lazyredraw = false                                          -- When this option is set, the screen will not redrawn while executing macros,registers and other commands that have not been typed.
 vim.opt.termguicolors = true                                        -- Enables 24-bit RGB color in the terminal
-vim.opt.guifont = "CozetteVector:h10"                               -- This is a list of fonts which will be used for the GUI version of Vim.
 vim.opt.backupdir = "/tmp//,."                                      -- List of directories for the backup file, separated with commas.
 vim.opt.fileencoding = "utf-8"                                      -- File-content encoding for the current buffer.
 vim.opt.encoding = "utf-8"                                          -- String-encoding used internally and for RPC communication.
-vim.opt.clipboard = "unnamedplus"                                   -- Copy paste between nvim and everything else.
+vim.opt.clipboard:append("unnamedplus")                             -- Copy paste between nvim and everything else.
+vim.opt.isfname:append("@-@")                                       -- Allow for file names with @-@ in them
 vim.opt.completeopt = "menu,menuone,noselect,noinsert"              -- A comma separated list of options for Insert mode completion.
 vim.opt.belloff = "all"                                             -- Specifies for which events the bell will not be rung. It is a commaseparated list of items.
 vim.opt.errorbells = false                                          -- Ring the bell (beep or screen flash) for error messages.
@@ -49,6 +50,7 @@ vim.opt.shortmess = "filnxtToOFsSc"                                 -- This opti
 vim.opt.numberwidth = 5                                             -- Minimal number of columns to use for the line number
 vim.opt.cindent = true                                              -- Get the amount of indent for line {lnum} according the C indenting rules, as with 'cindent'.
 vim.opt.undofile = true                                             -- When on, Vim automatically saves undo history to an undo file when writing a buffer to a file, and restores undo history from the same file on buffer read.
+vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"              -- Directory where the undo files will be stored.  The directory must exist and be writable.
 vim.opt.pumheight = 99                                              -- Maximum number of items to show in the popup menu
 vim.opt.undolevels = 1000                                           -- Maximum number of changes that can be undone.
 vim.opt.linebreak = true                                            -- If on, Vim will wrap long lines at a character in 'breakat' rather than at the last character that fits on the screen.
@@ -76,3 +78,5 @@ vim.opt.buftype = ""
 vim.opt.foldopen = vim.opt.foldopen + 'jump'                        -- Specifies for which type of commands folds will be opened, if the command moves the cursor into a closed fold.  It is a comma-separated list of items.
 vim.opt.fillchars = [[diff:/,eob: ,fold: ,foldopen:▼,foldsep: ,foldclose:▶]] -- Characters to fill the statuslines and vertical separators. vim.opt.diffopt = [[filler,internal,algorithm:histogram,indent-heuristic,iwhite,closeoff,vertical]] -- Option settings for diff mode. It can consist of the following items. All are optional.  Items must be separated by a comma.
 vim.opt.listchars = { eol = "↲", tab = "▶ ", trail = "•", precedes = "«", extends = "»", nbsp = "␣", space = " " } -- Strings to use in 'list' mode and for the :list command. It is a comma-separated list of string settings.
+---@diagnostic disable-next-line: inject-field
+vim.g.netrw_banner = 0                                                      -- Disable netrw banner
