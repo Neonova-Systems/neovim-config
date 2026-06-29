@@ -141,11 +141,11 @@ local plugins = { -- List of plugins -- https://github.com/folke/lazy.nvim#-plug
         priority = 1001,
         init = function() require('impatient') end,
     },
-    {
-        dir = "/etc/xdg/nvim",
-        priority = 1000,
-        config = function() vim.cmd("colorscheme craccken") end,
-    },
+    -- {
+    --     dir = "/etc/xdg/nvim",
+    --     priority = 1000,
+    --     config = function() vim.cmd("colorscheme craccken") end,
+    -- },
     { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim", "nvim-telescope/telescope-fzy-native.nvim" } },
     "numToStr/Comment.nvim",                                            -- Smart powerful plugin for neovim.
     "goolord/alpha-nvim",                                               -- Fancy-startscreen
@@ -211,34 +211,33 @@ local plugins = { -- List of plugins -- https://github.com/folke/lazy.nvim#-plug
     "anuvyklack/hydra.nvim",                                            -- Create custom submodes and menus 
     -- "nvim-zh/colorful-winsep.nvim"                                      -- Make your nvim window separators colorful 
     -- 'ElPiloto/significant.nvim'                                         -- When you've got something significant to say. 
-    "debugloop/telescope-undo.nvim",                                    -- A telescope extension to view and search your undo tree
+    -- "debugloop/telescope-undo.nvim",                                    -- A telescope extension to view and search your undo tree
     -- "nvim-telescope/telescope-media-files.nvim"                         -- Telescope extension to preview media files using Ueberzug. 
     -- 'stevearc/aerial.nvim',                                             -- Neovim plugin for a code outline window 
-    "David-Kunz/gen.nvim",                                              -- Neovim plugin to generate text using LLMs with customizable prompts 
     -- "seandewar/killersheep.nvim",                                    -- Neovim port of killersheep (with blood!) 
     -- "alanfortlink/blackjack.nvim",                                      -- Classic Black Jack game in Neovim 
     -- 'seandewar/nvimesweeper',                                           -- https://github.com/seandewar/nvimesweeper
-    { "luckasRanarison/tree-sitter-hyprlang", dependencies = "nvim-treesitter/nvim-treesitter"},
 
-    {
-        "hrsh7th/nvim-cmp", -- A completion plugin for neovim coded in lua.
-        dependencies = {
-            "dmitmel/cmp-cmdline-history",  -- Source for nvim-cmp which reads results from command-line or search histories 
-            -- "tamago324/cmp-zsh",         -- nvim-cmp source for zsh
-            "ray-x/cmp-treesitter",         -- nvim-cmp source for treesitter 
-            "hrsh7th/cmp-buffer",           -- nvim-cmp source for buffer words
-            "hrsh7th/cmp-cmdline",          -- nvim-cmp source for vim's cmdline
-            "hrsh7th/cmp-nvim-lua",         -- nvim-cmp source for nvim lua
-            "hrsh7th/cmp-path",             -- nvim-cmp source for directory path
-            "saadparwaiz1/cmp_luasnip",     -- luasnip completion source for nvim-cmp 
-            "hrsh7th/cmp-nvim-lsp",         -- nvim-cmp source for neovim builtin LSP client
-            "davidsierradz/cmp-conventionalcommits", -- nvim-cmp source for autocompleting git commits with conventional commits types and lerna packages as scope 
-            "hrsh7th/cmp-nvim-lsp-document-symbol", -- nvim-cmp source for textDocument/documentSymbol via nvim-lsp.
-            -- "hrsh7th/cmp-nvim-lsp-signature-help", -- nvim-cmp source for lsp-signature
-            "f3fora/cmp-spell",             -- spell source for nvim-cmp based on vim's spellsuggest.
-            "windwp/nvim-autopairs",        -- Autopairs for neovim written by lua
-        },
-    },
+    -- {
+    --     "hrsh7th/nvim-cmp", -- A completion plugin for neovim coded in lua.
+    --     dependencies = {
+    --         "dmitmel/cmp-cmdline-history",  -- Source for nvim-cmp which reads results from command-line or search histories 
+    --         -- "tamago324/cmp-zsh",         -- nvim-cmp source for zsh
+    --         "ray-x/cmp-treesitter",         -- nvim-cmp source for treesitter 
+    --         "hrsh7th/cmp-buffer",           -- nvim-cmp source for buffer words
+    --         "hrsh7th/cmp-cmdline",          -- nvim-cmp source for vim's cmdline
+    --         "hrsh7th/cmp-nvim-lua",         -- nvim-cmp source for nvim lua
+    --         "hrsh7th/cmp-path",             -- nvim-cmp source for directory path
+    --         "saadparwaiz1/cmp_luasnip",     -- luasnip completion source for nvim-cmp 
+    --         "hrsh7th/cmp-nvim-lsp",         -- nvim-cmp source for neovim builtin LSP client
+    --         "davidsierradz/cmp-conventionalcommits", -- nvim-cmp source for autocompleting git commits with conventional commits types and lerna packages as scope 
+    --         "hrsh7th/cmp-nvim-lsp-document-symbol", -- nvim-cmp source for textDocument/documentSymbol via nvim-lsp.
+    --         -- "hrsh7th/cmp-nvim-lsp-signature-help", -- nvim-cmp source for lsp-signature
+    --         "f3fora/cmp-spell",             -- spell source for nvim-cmp based on vim's spellsuggest.
+    --         "windwp/nvim-autopairs",        -- Autopairs for neovim written by lua
+    --     },
+    -- },
 }
 
-require("lazy").setup(plugins, configs)
+-- require("lazy").setup(plugins, config)
+require("lazy").setup("plugins")
