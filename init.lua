@@ -1,4 +1,6 @@
+require("vim._core.ui2").enable({})
 require("config.options")
+require("config.autocmd")
 require("config.builtin")
 require("config.diagnostic")
 require("config.keybindings")
