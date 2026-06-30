@@ -3,6 +3,7 @@ vim.diagnostic.config({ -- Configure diagnostic options globally or for a specif
     signs = true, -- Use signs for diagnostics.
     update_in_insert = false, -- Update diagnostics in Insert mode (if false, diagnostics are updated on InsertLeave)
     severity_sort = true, -- Sort diagnostics by severity.
+    virtual_text = true,
 })
 
 local diagnostic_signs = { -- Create list of icon and severity as key
@@ -18,3 +19,4 @@ end
 
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {desc = 'Move to the next diagnostic'})
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {desc = 'Move to the previous diagnostic in the current buffer'})
+vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, { desc = "Show diagnostics in a floating window." })

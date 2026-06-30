@@ -57,4 +57,3 @@ vim.keymap.set('n', 'sh', '<C-w>h', {noremap = true, silent = true, desc = 'Move
 vim.keymap.set('n', 'sj', '<C-w>j', {noremap = true, silent = true, desc = 'Move to down pane'})
 vim.keymap.set('n', 'sk', '<C-w>k', {noremap = true, silent = true, desc = 'Move to up pane'})
 vim.keymap.set('n', 'sl', '<C-w>l', {noremap = true, silent = true, desc = 'Move to right pane'})
-vim.keymap.set('', 'ZQ', function() require("dialog").force_quit_dialog() end, {noremap = true, desc = 'Force Quit'})
