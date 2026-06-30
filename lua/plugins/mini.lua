@@ -1,6 +1,7 @@
 return {
     "echasnovski/mini.nvim",
     version = false,
+    dependencies = { "rafamadriz/friendly-snippets" },
     config = function()
         require("mini.bufremove").setup()
         require("mini.comment").setup()
@@ -42,6 +43,10 @@ return {
                 end,
             }
         })
+        require("mini.snippets").setup({
+            snippets = { require("mini.snippets").gen_loader.from_lang() } -- loads friendly-snippets automatically
+        })
+        require("mini.snippets").start_lsp_server({ match = false })
 
         vim.keymap.set("n", "-", "<cmd>lua Minifiles.open()<CR>", { desc = "Toggle mini file explorer" })
         vim.keymap.set("n", "<leader>-", function()
