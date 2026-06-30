@@ -30,3 +30,20 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     group = autocommand_group,
     desc = "Convert binary to hex format again after write event",
 })
+
+-- Translate mini.diff summaries into a standardized string format for status lines
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MiniDiffUpdated', -- Fire hook when mini.diff refreshes internal math
+  callback = function(data)
+    local summary = vim.b[data.buf].minidiff_summary
+    if not summary then return end
+
+    local parts = {}
+    if summary.add > 0    then table.insert(parts, '+' .. summary.add) end
+    if summary.change > 0 then table.insert(parts, '~' .. summary.change) end
+    if summary.delete > 0 then table.insert(parts, '-' .. summary.delete) end
+
+    -- Re-bind variable cleanly for statusline reading blocks
+    vim.b[data.buf].minidiff_summary_string = table.concat(parts, ' ')
+  end,
+})
