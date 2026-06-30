@@ -43,10 +43,10 @@ vim.opt.fileencoding = "utf-8"                                      -- File-cont
 vim.opt.encoding = "utf-8"                                          -- String-encoding used internally and for RPC communication.
 vim.opt.clipboard:append("unnamedplus")                             -- Copy paste between nvim and everything else.
 vim.opt.isfname:append("@-@")                                       -- Allow for file names with @-@ in them
-vim.opt.completeopt = "menu,menuone,noselect,noinsert"              -- A comma separated list of options for Insert mode completion.
+vim.opt.completeopt = "menuone,noselect,nosort,fuzzy"             -- A comma separated list of options for Insert mode completion.
+vim.opt.shortmess = "filnxtToOFsSc"                                 -- This option helps to avoid all the hit-enter prompts caused by file messages, for example with CTRL-G, and to avoid some other messages. read :shortmess
 vim.opt.belloff = "all"                                             -- Specifies for which events the bell will not be rung. It is a commaseparated list of items.
 vim.opt.errorbells = false                                          -- Ring the bell (beep or screen flash) for error messages.
-vim.opt.shortmess = "filnxtToOFsSc"                                 -- This option helps to avoid all the hit-enter prompts caused by file messages, for example with CTRL-G, and to avoid some other messages. read :shortmess
 vim.opt.numberwidth = 5                                             -- Minimal number of columns to use for the line number
 vim.opt.cindent = true                                              -- Get the amount of indent for line {lnum} according the C indenting rules, as with 'cindent'.
 vim.opt.undofile = true                                             -- When on, Vim automatically saves undo history to an undo file when writing a buffer to a file, and restores undo history from the same file on buffer read.

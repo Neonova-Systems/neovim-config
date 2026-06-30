@@ -1,8 +1,61 @@
 return {
-  "echasnovski/mini.nvim",
-  version = false,
-  config = function()
-    require("mini.bufremove").setup({})
-    require("mini.comment").setup({})
-  end,
+    "echasnovski/mini.nvim",
+    version = false,
+    config = function()
+        require("mini.bufremove").setup()
+        require("mini.comment").setup()
+        require("mini.cmdline").setup({ autocorrect = { enable = false } })
+        require("mini.surround").setup({
+            -- Module mappings. Use `''` (empty string) to disable one.
+            mappings = {
+                add = 'sa',    -- Add surrounding in Normal and Visual modes
+                delete = 'sd', -- Delete surrounding
+                find = 'sf',   -- Find surrounding (to the right)
+                find_left = 'sF', -- Find surrounding (to the left)
+                highlight = 'sh', -- Highlight surrounding
+                replace = 'sr', -- Replace surrounding
+
+                suffix_last = 'l', -- Suffix to search with "prev" method
+                suffix_next = 'n', -- Suffix to search with "next" method
+            },
+        })
+        require("mini.files").setup({
+            mappings = {
+                go_in = "<CR>",
+                go_in_plus = "L",
+                go_out = "_",
+                go_out_plus = "H",
+            }
+        })
+        require("mini.notify").setup({
+            content = {
+                format = function(notif) return notif.msg end, -- only show messages
+            }
+        })
+        require("mini.pick").setup()
+        require("mini.extra").setup()
+        require("mini.completion").setup({
+            lsp_completion = {
+                auto_setup = true,
+                process_time = function(items, base)
+                    return require("mini.completion").default_process_items(items, base, { filtersort = "fuzzy", })
+                end,
+            }
+        })
+
+        vim.keymap.set("n", "-", "<cmd>lua Minifiles.open()<CR>", { desc = "Toggle mini file explorer" })
+        vim.keymap.set("n", "<leader>-", function()
+            MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+            MiniFiles.reveal_cwd()
+        end, { desc = "Toggle into currently opened file's directory" })
+        vim.keymap.set("n", "<leader>pf", function() require("mini.pick").builtin.files() end, { desc = "File picking" })
+        vim.keymap.set("n", "<leader>ps",
+            function() require("mini.pick").builtin.grep({ pattern = vim.fn.expand("<cword>") }) end,
+            { desc = "Pick file with search word pattern" })
+        vim.keymap.set("n", "<leader>vh", function() require("mini.pick").builtin.help() end, { desc = "Mini help" })
+        vim.keymap.set("n", "<leader>xx", function() require("mini.extra").pickers.diagnostic() end,
+            { desc = "Search diagnostics" })
+        vim.keymap.set("n", "<leader>pk", function() require("mini.extra").pickers.keymap() end,
+            { desc = "Search keymaps" })
+    end,
 }
