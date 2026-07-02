@@ -5,7 +5,7 @@ return {
     config = function()
         require("mini.bufremove").setup()
         require("mini.comment").setup()
-        require("mini.cmdline").setup({ autocorrect = { enable = false } })
+        require("mini.cmdline").setup()
         require("mini.surround").setup({
             -- Module mappings. Use `''` (empty string) to disable one.
             mappings = {
