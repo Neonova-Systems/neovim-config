@@ -81,6 +81,12 @@ return {
                 miniclue.gen_clues.windows(),
                 miniclue.gen_clues.z(),
             },
+            window = {
+                config = { width = math.floor(vim.o.columns * 0.33) },
+                delay = 1000, -- Delay before showing clue window
+                scroll_down = '<C-d>',
+                scroll_up = '<C-u>',
+            }
         })
         require("mini.completion").setup({
             lsp_completion = {
