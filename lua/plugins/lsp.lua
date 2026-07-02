@@ -1,5 +1,5 @@
 return {
-    {
+    { -- Main LSP configuration
         "neovim/nvim-lspconfig",
         dependencies = {
             "williamboman/mason.nvim",
@@ -86,8 +86,8 @@ return {
     {
         "smjonas/inc-rename.nvim",
         config = function()
-            require("inc-rename").setup()
-            vim.keymap.set("n", "<leader>rn", function() return ":IncRename " .. vim.fn.expand("<cword>") end, { expr = true })
+            require("inc_rename").setup()
+            vim.keymap.set("n", "<leader>grn", function() return ":IncRename " .. vim.fn.expand("<cword>") end, { expr = true })
         end,
     },
     {
@@ -108,6 +108,34 @@ return {
                     },
                 },
             }
+        end,
+    },
+    {
+        "lewis6991/hover.nvim",
+        config = function()
+            require("hover").setup({
+                providers = {
+                    'hover.providers.diagnostic',
+                    'hover.providers.lsp',
+                    'hover.providers.dap',
+                    'hover.providers.man',
+                    'hover.providers.dictionary',
+                    -- Optional, disabled by default:
+                    -- 'hover.providers.gh',
+                    -- 'hover.providers.gh_user',
+                    -- 'hover.providers.jira',
+                    -- 'hover.providers.fold_preview',
+                    -- 'hover.providers.highlight',
+                },
+            })
+            vim.keymap.set('n', 'K', function() require('hover').open() end, { desc = 'hover.nvim (open)' })
+            vim.keymap.set('n', 'gK', function() require('hover').enter() end, { desc = 'hover.nvim (enter)' })
+            vim.keymap.set('n', '<C-p>', function() require('hover').switch('previous') end, { desc = 'hover.nvim (previous source)' })
+            vim.keymap.set('n', '<C-n>', function() require('hover').switch('next') end, { desc = 'hover.nvim (next source)' })
+
+            -- Mouse support
+            vim.o.mousemoveevent = true
+            vim.keymap.set('n', '<MouseMove>', function() require('hover').mouse() end, { desc = 'hover.nvim (mouse)' })
         end,
     }
 }
