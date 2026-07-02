@@ -47,17 +47,3 @@ vim.api.nvim_create_autocmd('User', {
         vim.b[data.buf].minidiff_summary_string = table.concat(parts, ' ')
     end,
 })
-
--- Block LSP execution entirely on Git configurations
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "gitcommit", "gitrebase" },
-    callback = function()
-        -- Force-disable completion engines and structural tracking for the buffer
-        vim.opt_local.omnifunc = ""
-
-        local clients = vim.lsp.get_clients({ bufnr = 0 })
-        for _, client in ipairs(clients) do
-            vim.lsp.buf_detach(0, client.id)
-        end
-    end,
-})
