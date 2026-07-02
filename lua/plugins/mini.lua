@@ -9,6 +9,7 @@ return {
         require("mini.bracketed").setup()
         require("mini.ai").setup()
         require("mini.splitjoin").setup()
+        require('mini.operators').setup()
         require("mini.cmdline").setup({ autocomplete = { enable = true, delay = 150 }, autocorrect = { enable = false } })
         require("mini.surround").setup({
             -- Module mappings. Use `''` (empty string) to disable one.
@@ -100,6 +101,8 @@ return {
             snippets = { require("mini.snippets").gen_loader.from_lang() } -- loads friendly-snippets automatically
         })
         require("mini.snippets").start_lsp_server({ match = false })
+        local hipatterns = require('mini.hipatterns')
+        hipatterns.setup({ highlighters = { hex_color = hipatterns.gen_highlighter.hex_color(), }, })
 
         vim.keymap.set("n", "-", "<cmd>lua Minifiles.open()<CR>", { desc = "Toggle mini file explorer" })
         vim.keymap.set("n", "<leader>-", function()

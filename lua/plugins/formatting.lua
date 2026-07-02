@@ -1,0 +1,15 @@
+return {
+    "stevearc/conform.nvim",
+    config = {
+        require("conform").setup({
+            formatters_by_ft = {
+                javascript = { "prettierd", "prettier", stop_after_first = true },
+                typescript = { "prettierd", "prettier", stop_after_first = true },
+                html       = { "prettier" },
+                css        = { "prettier" },
+                json       = { "biome", "prettier", stop_after_first = true },
+            },
+            format_on_save = { timeout_ms = 500, lsp_format = "fallback" },
+        })
+    }
+}
