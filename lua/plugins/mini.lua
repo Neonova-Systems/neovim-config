@@ -41,6 +41,7 @@ return {
         require("mini.pick").setup()
         require("mini.extra").setup()
         require("mini.cursorword").setup()
+        require("mini.jump2d").setup()
         local miniclue = require('mini.clue')
         miniclue.setup({
             triggers = {
