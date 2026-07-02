@@ -27,7 +27,7 @@ return {
         end,
     },
     {
-        "nvim-mini/mini.git",
+        "nvim-mini/mini-git",
         version = false,
         event = "VeryLazy",
         config = function()
