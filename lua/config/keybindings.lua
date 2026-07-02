@@ -34,7 +34,7 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'move down in buffer with curso
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'move up in buffer with cursor centered' })
 vim.keymap.set('n', 'n', "nzzzv", { noremap = true, desc = 'Centering cursor when search' })
 vim.keymap.set('n', 'N', "Nzzzv", { noremap = true, desc = 'Centering cursor when search backward' })
-vim.keymap.set('n', "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI><Left><Left><Left>]],
+vim.keymap.set('n', "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
     { desc = "Replace all occurrences of the word under the cursor" })
 vim.keymap.set('n', "<leader>x", "<cmd>!chmod +x %<CR>", { desc = "Make file executable" })
 vim.keymap.set('n', "<leader>re", "<cmd>restart<cr>", { desc = "Restart Neovim (:restart)" })
