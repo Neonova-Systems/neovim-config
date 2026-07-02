@@ -57,3 +57,11 @@ vim.keymap.set('n', 'sh', '<C-w>h', {noremap = true, silent = true, desc = 'Move
 vim.keymap.set('n', 'sj', '<C-w>j', {noremap = true, silent = true, desc = 'Move to down pane'})
 vim.keymap.set('n', 'sk', '<C-w>k', {noremap = true, silent = true, desc = 'Move to up pane'})
 vim.keymap.set('n', 'sl', '<C-w>l', {noremap = true, silent = true, desc = 'Move to right pane'})
+
+-- Ctrl + h = Backspace
+vim.keymap.set("c", "<C-h>", "<BS>")
+
+-- Ctrl + w = Delete word
+vim.keymap.set("c", "<C-w>", "<C-u><C-w>")
+-- Ctrl + u = Delete line
+vim.keymap.set("c", "<C-u>", "<C-u><C-u>")
