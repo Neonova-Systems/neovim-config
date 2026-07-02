@@ -5,6 +5,10 @@ return {
     config = function()
         require("mini.bufremove").setup()
         require("mini.comment").setup()
+        require("mini.pairs").setup()
+        require("mini.bracketed").setup()
+        require("mini.ai").setup()
+        require("mini.splitjoin").setup()
         require("mini.cmdline").setup({ autocomplete = { enable = true, delay = 150 }, autocorrect = { enable = false } })
         require("mini.surround").setup({
             -- Module mappings. Use `''` (empty string) to disable one.

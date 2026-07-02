@@ -17,6 +17,4 @@ for type, icon in pairs(diagnostic_signs) do -- Create for loop with diagnostic_
     vim.fn.sign_define(highlight, { text = icon, texthl = highlight, numhl = ""}) -- Set diagnostic icon
 end
 
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {desc = 'Move to the next diagnostic'})
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {desc = 'Move to the previous diagnostic in the current buffer'})
 vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, { desc = "Show diagnostics in a floating window." })
