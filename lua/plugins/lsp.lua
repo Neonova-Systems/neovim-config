@@ -49,7 +49,15 @@ return {
                 }
             }
 
-            require("mason").setup()
+            require("mason").setup({
+                ui = {
+                    icons = {
+                        package_pending = "", -- The list icon to use for packages that are pending installation.
+                        package_installed = "", -- The list icon to use for installed packages.
+                        package_uninstalled = "", -- The list icon to use for packages that are not installed.
+                    },
+                }
+            })
             require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers), })
             for server_name, config in pairs(servers) do
                 vim.lsp.config(server_name, config)
