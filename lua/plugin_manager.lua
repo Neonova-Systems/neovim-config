@@ -151,7 +151,6 @@ local plugins = { -- List of plugins -- https://github.com/folke/lazy.nvim#-plug
     "goolord/alpha-nvim",                                               -- Fancy-startscreen
     -- 'sunjon/shade.nvim',                                                -- An Nvim lua plugin that dims your inactive windows
     { "nvim-tree/nvim-web-devicons", lazy = true },                     -- if some code requires a module from an unloaded plugin, it will be automatically loaded. So for api plugins like devicons, we can always set lazy=true
-    "lewis6991/gitsigns.nvim",                                          -- Git intergration for buffers
     "neovim/nvim-lspconfig",                                            -- Quickstart configuration for the neovim LSP client
     "lukas-reineke/indent-blankline.nvim",                              -- Indent guides for neovim.
     {
@@ -174,11 +173,6 @@ local plugins = { -- List of plugins -- https://github.com/folke/lazy.nvim#-plug
     { "SmiteshP/nvim-navic", dependencies = "neovim/nvim-lspconfig" },  -- Simple winbar/statusline plugin that shows your current code context
     "max397574/better-escape.nvim",                                     -- Escape from insert mode without delay when typing.
     "noib3/nvim-cokeline",                                              -- A Neovim bufferline for people with addictive personalities 
-    { 
-        "L3MON4D3/LuaSnip",                                             -- Snippet Engine for Neovim written in Lua. 
-        build = "make install_jsregexp",
-        dependencies = "rafamadriz/friendly-snippets" 
-    },
     -- use {'edluffy/specs.nvim'}                                          -- A fast and lightweight Neovim lua plugin to keep an eye on where your cursor has jumped. 
     {
         "dstein64/vim-startuptime",                                     -- A Vim plugin for profiling Vim's startup time.
@@ -202,7 +196,6 @@ local plugins = { -- List of plugins -- https://github.com/folke/lazy.nvim#-plug
     {"monaqa/dial.nvim", keys = { "<C-a>", { "<C-x>", mode = "n" } }}, -- Enhanced increment/decrement plugin for Neovim.
     {'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async'}, -- Not UFO in the sky, but an ultra fold in Neovim.
     -- "nkakouros-original/numbers.nvim",                               -- Toggles relativenumbers when not needed
-    "xiyaowong/nvim-cursorword",                                        -- Highlight the word under the cursor. 
     { "stevearc/dressing.nvim", event = "VeryLazy" },                   -- Neovim plugin to improve the default vim.ui interfaces, you can use the VeryLazy event for things that can load later and are not important for the initial UI
     {"folke/noice.nvim", dependencies = 'MunifTanjim/nui.nvim'},        -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu. 
     -- "kylechui/nvim-surround"                                            -- Add/change/delete surrounding delimiter pairs with ease. Written with heart in Lua. 
@@ -218,25 +211,6 @@ local plugins = { -- List of plugins -- https://github.com/folke/lazy.nvim#-plug
     -- "alanfortlink/blackjack.nvim",                                      -- Classic Black Jack game in Neovim 
     -- 'seandewar/nvimesweeper',                                           -- https://github.com/seandewar/nvimesweeper
 
-    -- {
-    --     "hrsh7th/nvim-cmp", -- A completion plugin for neovim coded in lua.
-    --     dependencies = {
-    --         "dmitmel/cmp-cmdline-history",  -- Source for nvim-cmp which reads results from command-line or search histories 
-    --         -- "tamago324/cmp-zsh",         -- nvim-cmp source for zsh
-    --         "ray-x/cmp-treesitter",         -- nvim-cmp source for treesitter 
-    --         "hrsh7th/cmp-buffer",           -- nvim-cmp source for buffer words
-    --         "hrsh7th/cmp-cmdline",          -- nvim-cmp source for vim's cmdline
-    --         "hrsh7th/cmp-nvim-lua",         -- nvim-cmp source for nvim lua
-    --         "hrsh7th/cmp-path",             -- nvim-cmp source for directory path
-    --         "saadparwaiz1/cmp_luasnip",     -- luasnip completion source for nvim-cmp 
-    --         "hrsh7th/cmp-nvim-lsp",         -- nvim-cmp source for neovim builtin LSP client
-    --         "davidsierradz/cmp-conventionalcommits", -- nvim-cmp source for autocompleting git commits with conventional commits types and lerna packages as scope 
-    --         "hrsh7th/cmp-nvim-lsp-document-symbol", -- nvim-cmp source for textDocument/documentSymbol via nvim-lsp.
-    --         -- "hrsh7th/cmp-nvim-lsp-signature-help", -- nvim-cmp source for lsp-signature
-    --         "f3fora/cmp-spell",             -- spell source for nvim-cmp based on vim's spellsuggest.
-    --         "windwp/nvim-autopairs",        -- Autopairs for neovim written by lua
-    --     },
-    -- },
 }
 
 -- require("lazy").setup(plugins, config)

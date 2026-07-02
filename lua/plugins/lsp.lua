@@ -50,12 +50,9 @@ return {
 
         require("mason").setup()
         require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers), })
-        require("mason-lspconfig").setup_handlers({
-            function(server_name)
-                local config = servers[server_name] or {}
-                require("lspconfig")[server_name].setup(config)
-            end,
-        })
+        for server_name, config in pairs(servers) do
+            require("lspconfig")[server_name].setup(config)
+        end
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = vim.tbl_deep_extend("force", capabilities, require("mini.completion").get_lsp_capabilities())
         vim.lsp.config("*", { capabilities = capabilities, })
