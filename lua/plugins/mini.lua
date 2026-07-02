@@ -106,7 +106,7 @@ return {
         local hipatterns = require('mini.hipatterns')
         hipatterns.setup({ highlighters = { hex_color = hipatterns.gen_highlighter.hex_color(), }, })
 
-        vim.api.nvim_set_hl(0, "MiniPickMatchCurrent", { link = "CursorLine" })
+        vim.api.nvim_set_hl(0, "MiniPickMatchCurrent", { fg = "#000000", bg = "#325CC0", bold = true })
 
         vim.keymap.set("n", "-", "<cmd>lua MiniFiles.open()<CR>", { desc = "Toggle mini file explorer" })
         vim.keymap.set("n", "<leader>-", function()
