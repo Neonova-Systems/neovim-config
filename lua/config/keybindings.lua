@@ -6,6 +6,7 @@ vim.keymap.set('', '<Down>', '<Nop>', { noremap = true })
 vim.keymap.set('', '<Left>', '<Nop>', { noremap = true })
 vim.keymap.set('', '<Right>', '<Nop>', { noremap = true })
 vim.keymap.set("x", "p", [[_dP]], { desc = "Paste over selection without overwriting the default register" })
+vim.keymap.set("v", "p", '"_dP')
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to blackhole register" })
 vim.keymap.set('i', '<C-c>', '<Esc>')
 vim.keymap.set('n', '<C-c>', ':noh<CR>', { noremap = true, silent = true, desc = 'Clean up searching' })
@@ -71,4 +72,3 @@ vim.keymap.set("c", "<C-h>", "<BS>")
 vim.keymap.set("c", "<C-w>", "<C-u><C-w>")
 vim.keymap.set("c", "<C-u>", "<C-u><C-u>")
 vim.keymap.set("c", "<C-BS>", "<C-w>", { remap = false }) -- Delete word backward using Ctrl + Backspace
-
