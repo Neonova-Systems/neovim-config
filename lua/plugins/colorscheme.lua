@@ -10,9 +10,9 @@ return {
         })
 
         vim.cmd.colorscheme('alabaster')
-        vim.set.keymap('n', '<leader>c', function()
+        vim.keymap.set('n', '<leader>c', function()
             require("alabaster").setup({ style = require("alabaster").config.style == "dark" and "light" or "dark" })
         end, { noremap = true, silent = true, desc = "Toggle Alabaster style (light / dark)" })
-        vim.set.keymap('n', '<leader>ct', '<cmd>lua require("alabaster").setup({ transparent = not require("alabaster").config.transparent })<CR>', { noremap = true, silent = true, desc = "Toggle Alabaster transparency" })
+        vim.keymap.set('n', '<leader>ct', '<cmd>lua require("alabaster").setup({ transparent = not require("alabaster").config.transparent })<CR>', { noremap = true, silent = true, desc = "Toggle Alabaster transparency" })
     end,
 }
