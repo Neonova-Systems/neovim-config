@@ -42,6 +42,7 @@ return {
         require("mini.extra").setup()
         require("mini.cursorword").setup()
         require("mini.jump2d").setup()
+        require('mini.indentscope').setup({ symbol = "│", options = { try_as_border = true }, })
         local miniclue = require('mini.clue')
         miniclue.setup({
             triggers = {
