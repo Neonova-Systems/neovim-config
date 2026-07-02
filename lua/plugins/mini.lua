@@ -14,12 +14,12 @@ return {
         require("mini.surround").setup({
             -- Module mappings. Use `''` (empty string) to disable one.
             mappings = {
-                add = 'sa',    -- Add surrounding in Normal and Visual modes
-                delete = 'sd', -- Delete surrounding
-                find = 'sf',   -- Find surrounding (to the right)
-                find_left = 'sF', -- Find surrounding (to the left)
-                highlight = 'sh', -- Highlight surrounding
-                replace = 'sr', -- Replace surrounding
+                add = 'sa',        -- Add surrounding in Normal and Visual modes
+                delete = 'sd',     -- Delete surrounding
+                find = 'sf',       -- Find surrounding (to the right)
+                find_left = 'sF',  -- Find surrounding (to the left)
+                highlight = 'sh',  -- Highlight surrounding
+                replace = 'sr',    -- Replace surrounding
 
                 suffix_last = 'l', -- Suffix to search with "prev" method
                 suffix_next = 'n', -- Suffix to search with "next" method
@@ -86,7 +86,7 @@ return {
             },
             window = {
                 config = { width = math.floor(vim.o.columns * 0.33) },
-                delay = 1000, -- Delay before showing clue window
+                delay = 734, -- Delay before showing clue window
                 scroll_down = '<C-d>',
                 scroll_up = '<C-u>',
             }
@@ -106,7 +106,9 @@ return {
         local hipatterns = require('mini.hipatterns')
         hipatterns.setup({ highlighters = { hex_color = hipatterns.gen_highlighter.hex_color(), }, })
 
-        vim.keymap.set("n", "-", "<cmd>lua Minifiles.open()<CR>", { desc = "Toggle mini file explorer" })
+        vim.api.nvim_set_hl(0, "MiniPickMatchCurrent", { link = "CursorLine" })
+
+        vim.keymap.set("n", "-", "<cmd>lua MiniFiles.open()<CR>", { desc = "Toggle mini file explorer" })
         vim.keymap.set("n", "<leader>-", function()
             MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
             MiniFiles.reveal_cwd()
