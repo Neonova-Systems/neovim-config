@@ -108,6 +108,7 @@ return {
 
         vim.api.nvim_set_hl(0, "MiniPickMatchCurrent", { fg = "#000000", bg = "#325CC0", bold = true })
 
+        local MiniFiles = require("mini.files")
         vim.keymap.set("n", "-", "<cmd>lua MiniFiles.open()<CR>", { desc = "Toggle mini file explorer" })
         vim.keymap.set("n", "<leader>-", function()
             MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
