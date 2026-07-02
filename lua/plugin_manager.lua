@@ -147,11 +147,9 @@ local plugins = { -- List of plugins -- https://github.com/folke/lazy.nvim#-plug
     --     config = function() vim.cmd("colorscheme craccken") end,
     -- },
     { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim", "nvim-telescope/telescope-fzy-native.nvim" } },
-    "numToStr/Comment.nvim",                                            -- Smart powerful plugin for neovim.
     "goolord/alpha-nvim",                                               -- Fancy-startscreen
     -- 'sunjon/shade.nvim',                                                -- An Nvim lua plugin that dims your inactive windows
     { "nvim-tree/nvim-web-devicons", lazy = true },                     -- if some code requires a module from an unloaded plugin, it will be automatically loaded. So for api plugins like devicons, we can always set lazy=true
-    "neovim/nvim-lspconfig",                                            -- Quickstart configuration for the neovim LSP client
     "lukas-reineke/indent-blankline.nvim",                              -- Indent guides for neovim.
     {
         "nvim-treesitter/nvim-treesitter",                              -- Nvim treesitter configurations and abstraction layer
@@ -180,8 +178,6 @@ local plugins = { -- List of plugins -- https://github.com/folke/lazy.nvim#-plug
         init = function() vim.g.startuptime_tries = 10 end, -- init is called during startup. Configuration for vim plugins typically should be set in an init function
     },
     -- "jubnzv/virtual-types.nvim"                                         -- Neovim plugin that shows type annotations as virtual text.
-    "uga-rosa/ccc.nvim",                                                -- Super powerful color picker / colorizer plugin. 
-    "jghauser/fold-cycle.nvim",                                         -- This neovim plugin allows you to cycle folds open or closed 
     { "elkowar/yuck.vim", ft = "yuck" },                                -- Vim filetype support for the new eww configuration language yuck.
     -- "abecodes/tabout.nvim"                                              -- Supercharge your workflow and start tabbing out from parentheses, quotes, and similar contexts today.
     -- "henriquehbr/nvim-startup.lua"                                      -- Displays neovim startup time
@@ -198,7 +194,6 @@ local plugins = { -- List of plugins -- https://github.com/folke/lazy.nvim#-plug
     -- "nkakouros-original/numbers.nvim",                               -- Toggles relativenumbers when not needed
     { "stevearc/dressing.nvim", event = "VeryLazy" },                   -- Neovim plugin to improve the default vim.ui interfaces, you can use the VeryLazy event for things that can load later and are not important for the initial UI
     {"folke/noice.nvim", dependencies = 'MunifTanjim/nui.nvim'},        -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu. 
-    -- "kylechui/nvim-surround"                                            -- Add/change/delete surrounding delimiter pairs with ease. Written with heart in Lua. 
     -- "Decodetalkers/csv-tools.lua"                                       -- for csv 
     -- "jinh0/eyeliner.nvim"                                               -- Move faster with unique f/F indicators. 
     "anuvyklack/hydra.nvim",                                            -- Create custom submodes and menus 
