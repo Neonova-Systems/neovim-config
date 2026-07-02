@@ -103,7 +103,7 @@ return {
         vim.keymap.set("n", "<leader>vh", function() require("mini.pick").builtin.help() end, { desc = "Mini help" })
         vim.keymap.set("n", "<leader>xx", function() require("mini.extra").pickers.diagnostic() end,
             { desc = "Search diagnostics" })
-        vim.keymap.set("n", "<leader>pk", function() require("mini.extra").pickers.keymap() end,
+        vim.keymap.set("n", "<leader>pk", function() require("mini.extra").pickers.keymaps() end,
             { desc = "Search keymaps" })
     end,
 }
