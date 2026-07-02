@@ -60,6 +60,7 @@ return {
             local modified = vim.bo.modified and " 󰫈 " or " 󰋙 "
             local readonly = ((not vim.bo.modifiable) or vim.bo.readonly) and "" or ""
 
+
             -- Components
             local lsp = get_lsp_status()
             local diag = get_diagnostic_status()
@@ -69,8 +70,8 @@ return {
 
             -- Layout format assembly
             return string.format(
-                "%s%s%s %s %s%s %= %s %s %s %s %s",
-                search, macro, mode_str, filename, modified, readonly,
+                "%s%s%s %s %s%s %s %s %s %s %s %s",
+                search, macro, mode_str, filename, modified, readonly, "%=",
                 git, diag, lsp, filetype, location
             )
         end
