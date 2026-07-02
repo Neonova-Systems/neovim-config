@@ -13,15 +13,6 @@ vim.opt.list = false                                                -- List mode
 vim.opt.scrolloff = 10                                              -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.sidescrolloff = 10                                          -- The minimal number of screen columns to keep to the left and to the right of the cursor if 'nowrap' is set.
 vim.opt.wildmenu = true                                             -- Enable 'enchanced mode' of command-line completion.
--- Force explicit character injection on backspace events
-vim.keymap.set("c", "<BS>", function()
-  return vim.fn.getcmdpos() > 1 and "<BS>" or ""
-end, { expr = true, remap = false })
-
--- Override default terminal blockades
-vim.keymap.set("c", "<C-h>", function()
-  return vim.fn.getcmdpos() > 1 and "<BS>" or ""
-end, { expr = true, remap = false })
 vim.opt.wildmode = "full"                                           -- Completion mode that is used for the character specified with 'wildchar'.
 vim.opt.wildignore = {'**/.git/*', '**/node_modules/*'}             -- A list of file patterns, a file that matches with one of these patterns is ignored when expanding wildcards.
 vim.opt.showcmd = true                                              -- Show (partial) command in the last line of the screen. Set this option off if your terminal is slow.
