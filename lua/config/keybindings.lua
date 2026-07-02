@@ -62,3 +62,4 @@ vim.keymap.set('n', 'sl', '<C-w>l', {noremap = true, silent = true, desc = 'Move
 vim.keymap.set("c", "<C-h>", "<BS>")
 vim.keymap.set("c", "<C-w>", "<C-u><C-w>")
 vim.keymap.set("c", "<C-u>", "<C-u><C-u>")
+vim.keymap.set("c", "<C-BS>", "<C-w>", { remap = false }) -- Delete word backward using Ctrl + Backspace
