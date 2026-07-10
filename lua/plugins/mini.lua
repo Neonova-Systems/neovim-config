@@ -162,11 +162,32 @@ return {
             MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
             MiniFiles.reveal_cwd()
         end, { desc = "Toggle into currently opened file's directory" })
-        vim.keymap.set("n", "<leader>pf", function() require("mini.pick").builtin.files() end, { desc = "File picking" })
+
+
+        local MiniPick = require("mini.pick")
+        vim.keymap.set("n", "<leader>pf", function() MiniPick.builtin.files() end, { desc = "File picking" })
         vim.keymap.set("n", "<leader>ps",
             function() require("mini.pick").builtin.grep({ pattern = vim.fn.expand("<cword>") }) end,
             { desc = "Pick file with search word pattern" })
-        vim.keymap.set("n", "<leader>vh", function() require("mini.pick").builtin.help() end, { desc = "Mini help" })
+        vim.keymap.set('n', '<space>fw', function()
+            local current_word = vim.fn.expand('<cword>')
+            if current_word == "" then return end
+
+            -- Find the workspace root by looking for common project markers (.git folder or Makefile)
+            local root_files = { '.git', 'Makefile', 'package.json' }
+            local workspace_root = vim.fs.root(0, root_files) or vim.fn.getcwd()
+
+            -- Launch picker targeted directly at the workspace root directory path
+            MiniPick.builtin.grep({
+                pattern = current_word,
+                source = {
+                    cwd = workspace_root -- Explicitly overrides the search execution boundary path
+                }
+            })
+        end, { desc = "Fuzzy Pick Word at Workspace Root" })
+        vim.keymap.set("n", "<leader>vh", function() MiniPick.builtin.help() end, { desc = "Mini help" })
+
+
         vim.keymap.set("n", "<leader>xx", function() require("mini.extra").pickers.diagnostic() end,
             { desc = "Search diagnostics" })
         vim.keymap.set("n", "<leader>pk", function() require("mini.extra").pickers.keymaps() end,
