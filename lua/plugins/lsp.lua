@@ -67,15 +67,22 @@ return {
             vim.lsp.config("*", { capabilities = capabilities, })
 
             -- default
-            -- vim.keymap.set('n', 'gri', vim.lsp.buf.implementation, opts)  -- Go to Implementation
-            -- vim.keymap.set('n', 'grt', vim.lsp.buf.type_definition, opts)  -- Go to Type Definition
-            -- vim.keymap.set('n', 'grr', vim.lsp.buf.references, opts)       -- Find References
-            -- vim.keymap.set('n', 'grn', vim.lsp.buf.rename, opts)           -- Rename
-            -- vim.keymap.set({ 'n', 'v' }, 'gra', vim.lsp.buf.code_action, opts) -- Code Action
-            -- vim.keymap.set('n', 'grx', vim.lsp.codelens.run, opts)         -- Run CodeLens
-            -- vim.keymap.set('n', 'gO', vim.lsp.buf.document_symbol, opts)   -- Document Symbols
-            -- vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help, opts) -- Signature help
-            -- vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Show documentation" }))
+            vim.keymap.set('n', 'gri', vim.lsp.buf.implementation, { desc = "Go to Implementation" })   -- Go to Implementation
+            vim.keymap.set('n', 'grt', vim.lsp.buf.type_definition, { desc = "Go to Type Definition" }) -- Go to Type Definition
+            vim.keymap.set('n', 'grr', function()
+                vim.lsp.buf.references({                                                                -- Fetch usage references across the active project structure workspace
+                    includeDeclaration = true,
+                    on_list = function(options)
+                        vim.fn.setqflist({}, ' ', options) -- Dumps the references array directly into the system quickfix stack
+                        vim.cmd('copen')                   -- Open the quickfix window UI layout without pulling your active focus away
+                    end
+                })
+            end, { desc = "LSP References to Quickfix List" })
+            vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { desc = "LSP Code Action" })
+            vim.keymap.set('n', 'grx', vim.lsp.codelens.run, { desc = "LSP: Run CodeLens Command" })
+            vim.keymap.set('n', 'gO', vim.lsp.buf.document_symbol, { desc = "LSP: List Document Symbols" })
+            vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help, { desc = "LSP: Show Signature Help" })
+
             vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Go to definition" })
             vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
             vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format Local buffer" })
@@ -87,12 +94,13 @@ return {
         "smjonas/inc-rename.nvim",
         config = function()
             require("inc_rename").setup()
-            vim.keymap.set("n", "<leader>grn", function() return ":IncRename " .. vim.fn.expand("<cword>") end, { expr = true })
+            vim.keymap.set("n", "<leader>grn", function() return ":IncRename " .. vim.fn.expand("<cword>") end,
+                { expr = true, desc = "LSP Rename" })
         end,
     },
     {
         "aznhe21/actions-preview.nvim",
-        config = function() 
+        config = function()
             require("actions-preview").setup {
                 telescope = {
                     sorting_strategy = "ascending",
@@ -130,8 +138,10 @@ return {
             })
             vim.keymap.set('n', 'K', function() require('hover').open() end, { desc = 'hover.nvim (open)' })
             vim.keymap.set('n', 'gK', function() require('hover').enter() end, { desc = 'hover.nvim (enter)' })
-            vim.keymap.set('n', '<C-p>', function() require('hover').switch('previous') end, { desc = 'hover.nvim (previous source)' })
-            vim.keymap.set('n', '<C-n>', function() require('hover').switch('next') end, { desc = 'hover.nvim (next source)' })
+            vim.keymap.set('n', '<C-p>', function() require('hover').switch('previous') end,
+                { desc = 'hover.nvim (previous source)' })
+            vim.keymap.set('n', '<C-n>', function() require('hover').switch('next') end,
+                { desc = 'hover.nvim (next source)' })
 
             -- Mouse support
             vim.o.mousemoveevent = true
