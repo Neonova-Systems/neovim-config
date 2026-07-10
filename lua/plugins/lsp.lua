@@ -70,14 +70,15 @@ return {
             vim.keymap.set('n', 'gri', vim.lsp.buf.implementation, { desc = "Go to Implementation" })   -- Go to Implementation
             vim.keymap.set('n', 'grt', vim.lsp.buf.type_definition, { desc = "Go to Type Definition" }) -- Go to Type Definition
             vim.keymap.set('n', 'grr', function()
-                vim.lsp.buf.references({                                                                -- Fetch usage references across the active project structure workspace
-                    includeDeclaration = true,
+                local lsp_params = { context = { includeDeclaration = true } }
+                local local_options = {
                     on_list = function(options)
-                        vim.fn.setqflist({}, ' ', options) -- Dumps the references array directly into the system quickfix stack
-                        vim.cmd('copen')                   -- Open the quickfix window UI layout without pulling your active focus away
+                        vim.fn.setqflist({}, ' ', options)
+                        vim.cmd('copen')
                     end
-                })
-            end, { desc = "LSP References to Quickfix List" })
+                }
+                vim.lsp.buf.references(lsp_params, local_options)
+            end, { desc = "LSP: References to Quickfix List" })
             vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { desc = "LSP Code Action" })
             vim.keymap.set('n', 'grx', vim.lsp.codelens.run, { desc = "LSP: Run CodeLens Command" })
             vim.keymap.set('n', 'gO', vim.lsp.buf.document_symbol, { desc = "LSP: List Document Symbols" })
