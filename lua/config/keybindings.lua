@@ -12,9 +12,9 @@ vim.keymap.set('i', '<C-c>', '<Esc>')
 vim.keymap.set('n', '<C-c>', ':noh<CR>', { noremap = true, silent = true, desc = 'Clean up searching' })
 
 -- Quick fix list navigation
-vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz',
+vim.keymap.set('n', '<C-Down>', '<cmd>cprev<CR>zz',
     { noremap = true, silent = true, desc = 'Display the previous error in the list that includes a file name.' })
-vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz',
+vim.keymap.set('n', '<C-Up>', '<cmd>cnext<CR>zz',
     { noremap = true, silent = true, desc = 'Display the next error in the list that includes a file name.' })
 
 -- Moving lines of text up and down
