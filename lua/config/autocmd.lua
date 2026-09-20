@@ -47,3 +47,9 @@ vim.api.nvim_create_autocmd('User', {
         vim.b[data.buf].minidiff_summary_string = table.concat(parts, ' ')
     end,
 })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(ev)
+        vim.lsp.document_color.enable(true, { bufnr = ev.buf })
+    end,
+})
