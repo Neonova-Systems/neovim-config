@@ -108,7 +108,7 @@ return {
             return vim.fn.pumvisible() == 1 and '<C-p>' or '<S-Tab>'
         end, { expr = true })
         require("mini.snippets").setup({
-            snippets = { require("mini.snippets").gen_loader.from_lang() } -- loads friendly-snippets automatically
+            snippets = { require("mini.snippets").gen_loader.from_lang() }, -- loads friendly-snippets automatically
             mappings = {
                 expand = '<C-j>',
                 jump_next = '<C-l>',
