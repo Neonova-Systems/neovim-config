@@ -66,8 +66,9 @@ return {
         -- Map C-k to trigger C-p inside mini.pick buffer
         vim.api.nvim_create_autocmd('User', {
             pattern = 'MiniPickStart',
-            callback = function(ev)
-                vim.keymap.set('i', '<C-k>', '<C-p>', { buffer = ev, remap = true })
+            callback = function()
+                local buf = vim.api.nvim_get_current_buf()
+                vim.keymap.set('i', '<C-k>', '<C-p>', { buffer = buf, remap = true })
             end,
         })
     end,
