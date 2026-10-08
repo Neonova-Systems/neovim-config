@@ -39,45 +39,7 @@ return {
                 format = function(notif) return notif.msg end, -- only show messages
             }
         })
-        require("mini.pick").setup({
-            mappings = {
-                caret_left        = '<Left>',
-                caret_right       = '<Right>',
 
-                choose            = '<CR>',
-                choose_in_split   = '<C-s>',
-                choose_in_tabpage = '<C-t>',
-                choose_in_vsplit  = '<C-v>',
-                choose_marked     = '<M-CR>',
-
-                delete_char       = '<BS>',
-                delete_char_right = '<Del>',
-                delete_left       = '<C-u>',
-                delete_word       = '<C-w>',
-
-                mark              = '<C-x>',
-                mark_all          = '<C-a>',
-
-                move_down         = '<C-j>',
-                move_start        = '<C-g>',
-                move_up           = '<C-k>',
-
-                paste             = '<C-r>',
-
-                refine            = '<C-Space>',
-                refine_marked     = '<M-Space>',
-
-                scroll_down       = '<C-f>',
-                scroll_left       = '<C-h>',
-                scroll_right      = '<C-l>',
-                scroll_up         = '<C-b>',
-
-                stop              = '<Esc>',
-
-                toggle_info       = '<S-Tab>',
-                toggle_preview    = '<Tab>',
-            },
-        })
         require("mini.extra").setup()
         require("mini.cursorword").setup()
         require("mini.jump2d").setup()
@@ -171,11 +133,7 @@ return {
         end, { desc = "Toggle into currently opened file's directory" })
 
 
-        local MiniPick = require("mini.pick")
         vim.keymap.set("n", "<leader>pf", function() MiniPick.builtin.files() end, { desc = "File picking" })
-        vim.keymap.set("n", "<leader>ps",
-            function() require("mini.pick").builtin.grep({ pattern = vim.fn.expand("<cword>") }) end,
-            { desc = "Pick file with search word pattern" })
         vim.keymap.set('n', '<space>fw', function()
             local current_word = vim.fn.expand('<cword>')
             if current_word == "" then return end
