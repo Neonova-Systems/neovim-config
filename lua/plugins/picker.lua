@@ -39,6 +39,7 @@ return {
                 move_down         = '<C-n>',
 
                 move_start        = '<C-g>',
+                -- move_up         = '<C-k>',
                 move_up           = '<C-p>',
 
                 paste             = '<C-r>',
@@ -57,19 +58,6 @@ return {
                 toggle_preview    = '<Tab>',
             },
             { window = { config = win_config } }
-        })
-        -- Map C-j to execute move_down action during active picker
-        vim.keymap.set('i', '<C-j>', function()
-            minipick.default_choose() -- or invoke minipick built-in actions
-        end)
-
-        -- Map C-k to trigger C-p inside mini.pick buffer
-        vim.api.nvim_create_autocmd('User', {
-            pattern = 'MiniPickStart',
-            callback = function()
-                local buf = vim.api.nvim_get_current_buf()
-                vim.keymap.set('i', '<C-k>', '<C-p>', { buffer = buf, remap = true })
-            end,
         })
     end,
     keys = {
