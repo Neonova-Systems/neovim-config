@@ -63,11 +63,11 @@ return {
             minipick.default_choose() -- or invoke minipick built-in actions
         end)
 
-        -- Map C-j to trigger C-p inside mini.pick buffer
+        -- Map C-k to trigger C-p inside mini.pick buffer
         vim.api.nvim_create_autocmd('User', {
             pattern = 'MiniPickStart',
-            callback = function(args)
-                vim.keymap.set('i', '<C-j>', '<C-p>', { buffer = args.data.buf_id, remap = true })
+            callback = function(ev)
+                vim.keymap.set('i', '<C-k>', '<C-p>', { buffer = ev, remap = true })
             end,
         })
     end,
