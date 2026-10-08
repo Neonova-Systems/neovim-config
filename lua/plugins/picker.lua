@@ -1,5 +1,5 @@
 return {
-    'mini.nvim/mini.pick',
+    dependencies = { "nvim-mini/mini.nvim", },
     version = false, -- use main branch for latest updates
     config = function()
         local minipick = require('mini.pick')
