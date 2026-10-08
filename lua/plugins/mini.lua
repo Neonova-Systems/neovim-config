@@ -109,7 +109,19 @@ return {
         end, { expr = true })
         require("mini.snippets").setup({
             snippets = { require("mini.snippets").gen_loader.from_lang() } -- loads friendly-snippets automatically
+            mappings = {
+                expand = '<C-j>',
+                jump_next = '<C-l>',
+                jump_prev = '<C-h>', -- Change or remove if overriding <C-h>
+            },
         })
+
+        -- Map Insert Mode <C-BS> / <C-h> to delete word without snippet collision
+        vim.keymap.set('i', '<C-BS>', '<C-w>')
+        vim.keymap.set('i', '<C-h>', function()
+            -- Fallback to <C-w> if not active in snippet
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-w>', true, true, true), 'n', true)
+        end)
         require("mini.snippets").start_lsp_server({ match = false })
         local hipatterns = require('mini.hipatterns')
         hipatterns.setup({
