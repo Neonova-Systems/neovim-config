@@ -1,4 +1,5 @@
 return {
+    "nvim-mini/mini.picker",
     dependencies = { "nvim-mini/mini.nvim", },
     version = false, -- use main branch for latest updates
     config = function()
