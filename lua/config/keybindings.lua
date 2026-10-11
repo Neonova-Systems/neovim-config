@@ -74,3 +74,24 @@ vim.keymap.set("c", "<C-u>", "<C-u><C-u>")
 vim.keymap.set("c", "<C-BS>", "<C-w>", { remap = false }) -- Delete word backward using Ctrl + Backspace
 
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
+local function copy_ref(opts)
+    local path = vim.fn.expand("%:.") -- "%" is the current buffer's file name; ":." makes it relative to the cwd
+    local ref = path                  -- ref is what ends up in the clipboard; start with just the path
+
+    if opts.visual then
+        -- '< and '> are only set after leaving visual mode, so read the live selection:
+        local start_line = vim.fn.line("v") -- "v" is the line where visual mode was started (the anchor)
+        local end_line = vim.fn.line(".")   -- "." is the line the cursor is on now (the moving end of the selection)
+        if start_line > end_line then       -- if the selection was made upward, swap so start is always the smaller line
+            start_line, end_line = end_line, start_line
+        end
+        ref = path .. ":" .. start_line .. ":" .. end_line -- append the range, e.g. "lua/config/keymaps.lua:1:23"
+    end
+
+    vim.fn.setreg("+", ref)       -- write ref into the "+" register, which is the system clipboard
+    vim.notify("Copied: " .. ref) -- show a confirmation message with what was copied
+end
+
+vim.keymap.set("n", "<leader>cp", function() copy_ref({}) end, { desc = "Copy file path" })
+vim.keymap.set("v", "<leader>cp", function() copy_ref({ visual = true }) end, { desc = "Copy file path with line range" })
