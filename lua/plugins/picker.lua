@@ -61,10 +61,30 @@ return {
         })
     end,
     keys = {
-        { "<leader>ps", function() require("mini.pick").builtin.grep({ pattern = vim.fn.expand("<cword>") }) end, desc = "Pick file with search word pattern" },
+        { "<leader>fs", function() require("mini.pick").builtin.grep({ pattern = vim.fn.expand("<cword>") }) end, desc = "Pick file with search word pattern" },
         { '<leader>ff', function() require('mini.pick').builtin.files() end,                                      desc = 'Find Files' },
         { '<leader>fg', function() require('mini.pick').builtin.grep_live() end,                                  desc = 'Grep Live' },
         { '<leader>fb', function() require('mini.pick').builtin.buffers() end,                                    desc = 'Find Buffers' },
         { '<leader>fh', function() require('mini.pick').builtin.help() end,                                       desc = 'Find Help' },
+        {
+            '<leader>fw',
+            function()
+                local current_word = vim.fn.expand('<cword>')
+                if current_word == "" then return end
+
+                -- Find the workspace root by looking for common project markers (.git folder or Makefile)
+                local root_files = { '.git', 'Makefile', 'package.json' }
+                local workspace_root = vim.fs.root(0, root_files) or vim.fn.getcwd()
+
+                -- Launch picker targeted directly at the workspace root directory path
+                require('mini.pick').builtin.grep({
+                    pattern = current_word,
+                    source = {
+                        cwd = workspace_root -- Explicitly overrides the search execution boundary path
+                    }
+                })
+            end,
+            desc = "Fuzzy Pick word at workspace Root"
+        },
     },
 }
