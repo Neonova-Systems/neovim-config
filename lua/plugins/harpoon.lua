@@ -4,7 +4,12 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
         local harpoon = require("harpoon")
-        harpoon:setup()
+        harpoon:setup({
+            settings = {
+                save_on_toggle = true,
+                sync_on_ui_close = true,
+            },
+        })
 
         vim.api.nvim_create_autocmd("User", { -- Force Harpoon to write to disk instantly when adding or removing entries
             pattern = "HarpoonChanged",
