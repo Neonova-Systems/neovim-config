@@ -53,7 +53,7 @@ return {
                 end),
                 rtxt = "<leader>grn",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Goto Definition",
                 cmd = vim.lsp.buf.definition,
@@ -74,7 +74,7 @@ return {
                 cmd = vim.lsp.buf.type_definition,
                 rtxt = "grt",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Peek Definitions",
                 cmd = "Glance definitions",
@@ -95,7 +95,7 @@ return {
                 cmd = "Glance implementations",
                 rtxt = "gpi",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Document Symbols",
                 cmd = picker_lsp("document_symbol"),
@@ -116,7 +116,7 @@ return {
                 cmd = ":LspRestart",
                 rtxt = "lr",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Stage Hunk",
                 cmd = function() require("gitsigns").stage_hunk() end,
@@ -132,7 +132,7 @@ return {
                 cmd = function() require("gitsigns").reset_hunk() end,
                 rtxt = "ghr",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Preview Hunk",
                 cmd = function() require("gitsigns").preview_hunk() end,
@@ -143,7 +143,7 @@ return {
                 cmd = function() require("gitsigns").blame_line({ full = true }) end,
                 rtxt = "ghb",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Diff This",
                 cmd = function() require("gitsigns").diffthis() end,
@@ -154,7 +154,7 @@ return {
                 cmd = function() require("gitsigns").diffthis("~") end,
                 rtxt = "ghD",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Git Status",
                 cmd = ":Git status",
@@ -180,7 +180,7 @@ return {
                 cmd = ":Git log --oneline -20",
                 rtxt = "gl",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Add File",
                 cmd = function() if harpoon_available() then require("harpoon"):list():add() end end,
@@ -191,7 +191,7 @@ return {
                 cmd = function() if harpoon_available() then require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end end,
                 rtxt = "hm",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "File 1",
                 cmd = function() if harpoon_available() then require("harpoon"):list():select(1) end end,
@@ -212,7 +212,7 @@ return {
                 cmd = function() if harpoon_available() then require("harpoon"):list():select(4) end end,
                 rtxt = "h4",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Next File",
                 cmd = function() if harpoon_available() then require("harpoon"):list():next() end end,
@@ -228,7 +228,7 @@ return {
                 cmd = function() if harpoon_available() then require("harpoon"):list():clear() end end,
                 rtxt = "hC",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Find Files",
                 cmd = mini_pick("files"),
@@ -249,7 +249,7 @@ return {
                 cmd = mini_pick("help"),
                 rtxt = "<leader>fh",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Grep (Live)",
                 cmd = mini_pick("grep_live"),
@@ -260,7 +260,7 @@ return {
                 cmd = mini_pick("grep"),
                 rtxt = "<leader>fw",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "LSP References",
                 cmd = picker_lsp("references"),
@@ -302,7 +302,7 @@ return {
                 cmd = mini_pick("colorschemes"),
                 rtxt = "<leader>fC",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Telescope Find Files",
                 cmd = ":Telescope find_files",
@@ -318,7 +318,7 @@ return {
                 cmd = ":Telescope buffers",
                 rtxt = "tb",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Document Diagnostics",
                 cmd = picker_diagnostic("current"),
@@ -329,7 +329,7 @@ return {
                 cmd = picker_diagnostic("all"),
                 rtxt = "dD",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Next Diagnostic",
                 cmd = function() vim.diagnostic.goto_next({ float = false }) end,
@@ -350,7 +350,7 @@ return {
                 cmd = function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR, float = false }) end,
                 rtxt = "[e",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Open Float",
                 cmd = vim.diagnostic.open_float,
@@ -366,7 +366,7 @@ return {
                 cmd = vim.diagnostic.setqflist,
                 rtxt = "dq",
             },
-            { name = " separator" },
+            { name = "separator" },
             {
                 name = "Toggle Virtual Text",
                 cmd = function()
