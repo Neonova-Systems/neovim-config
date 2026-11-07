@@ -73,8 +73,6 @@ vim.keymap.set("c", "<C-w>", "<C-u><C-w>")
 vim.keymap.set("c", "<C-u>", "<C-u><C-u>")
 vim.keymap.set("c", "<C-BS>", "<C-w>", { remap = false }) -- Delete word backward using Ctrl + Backspace
 
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-
 local function copy_ref(opts)
     local path = vim.fn.expand("%:.") -- "%" is the current buffer's file name; ":." makes it relative to the cwd
     local ref = path                  -- ref is what ends up in the clipboard; start with just the path

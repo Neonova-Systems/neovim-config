@@ -203,7 +203,7 @@ return {
             {
                 name = "Show Signature Help",
                 cmd = vim.lsp.buf.signature_help,
-                rtxt = "<C-s>",
+                rtxt = "gsh",
             },
             {
                 name = "Hover Documentation",
@@ -296,11 +296,6 @@ return {
             },
             {
                 name = "Grep Word",
-                cmd = deferred(function() require("mini.pick").builtin.grep({ pattern = vim.fn.expand("<cword>") }) end),
-                rtxt = "<leader>fs",
-            },
-            {
-                name = "Grep Word (Root)",
                 cmd = deferred(function()
                     local word = vim.fn.expand("<cword>")
                     if word == "" then return end
@@ -334,7 +329,7 @@ return {
             {
                 name = "Keymaps",
                 cmd = mini_extra("keymaps"),
-                rtxt = "<leader>pk",
+                rtxt = "<leader>fk",
             },
             {
                 name = "Registers",
@@ -348,11 +343,11 @@ return {
             {
                 name = "Document Diagnostics",
                 cmd = picker_diagnostic("current"),
+                rtxt = "<leader>fd",
             },
             {
                 name = "Workspace Diagnostics",
                 cmd = picker_diagnostic("all"),
-                rtxt = "<leader>xx",
             },
             { name = "separator" },
             {

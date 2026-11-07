@@ -83,6 +83,7 @@ return {
             vim.keymap.set('n', 'grx', vim.lsp.codelens.run, { desc = "LSP: Run CodeLens Command" })
             vim.keymap.set('n', 'gO', vim.lsp.buf.document_symbol, { desc = "LSP: List Document Symbols" })
             vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help, { desc = "LSP: Show Signature Help" })
+            vim.keymap.set('n', 'gsh', vim.lsp.buf.signature_help, { desc = "LSP: Show Signature Help" })
 
             vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Go to definition" })
             vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })

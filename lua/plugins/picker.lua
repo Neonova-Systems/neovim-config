@@ -61,7 +61,6 @@ return {
         })
     end,
     keys = {
-        { "<leader>fs", function() require("mini.pick").builtin.grep({ pattern = vim.fn.expand("<cword>") }) end, desc = "Pick file with search word pattern" },
         { '<leader>ff', function() require('mini.pick').builtin.files() end,                                      desc = 'Find Files' },
         { '<leader>fg', function() require('mini.pick').builtin.grep_live() end,                                  desc = 'Grep Live' },
         { '<leader>fb', function() require('mini.pick').builtin.buffers() end,                                    desc = 'Find Buffers' },
@@ -84,7 +83,8 @@ return {
                     }
                 })
             end,
-            desc = "Fuzzy Pick word at workspace Root"
+            desc = "Grep word at workspace Root"
         },
+        { '<leader>fk', function() require('mini.extra').pickers.keymaps() end, desc = 'Search Keymaps' },
     },
 }
