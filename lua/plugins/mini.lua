@@ -2,14 +2,6 @@ return {
     "nvim-mini/mini.nvim",
     version = false,
     dependencies = { "rafamadriz/friendly-snippets" },
-    keys = {
-        { "-", function() require("mini.files").open() end, desc = "Toggle mini file explorer" },
-        { "<leader>-", function()
-            local MiniFiles = require("mini.files")
-            MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
-            MiniFiles.reveal_cwd()
-        end, desc = "Toggle into current file's directory" },
-    },
     config = function()
         require("mini.bufremove").setup()
         require("mini.comment").setup()
@@ -155,6 +147,16 @@ return {
         })
 
         vim.api.nvim_set_hl(0, "MiniPickMatchCurrent", { fg = "#000000", bg = "#325CC0", bold = true })
+
+        local MiniFiles = require("mini.files")
+        vim.keymap.set("n", "-", "<cmd>lua MiniFiles.open()<CR>", { desc = "Toggle mini file explorer" })
+        vim.keymap.set("n", "<leader>-", function()
+            MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+            MiniFiles.reveal_cwd()
+        end, { desc = "Toggle into currently opened file's directory" })
+
+
+
 
         vim.keymap.set("n", "<leader>xx", function() require("mini.extra").pickers.diagnostic() end,
             { desc = "Search diagnostics" })
