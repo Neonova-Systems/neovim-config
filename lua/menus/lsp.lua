@@ -47,6 +47,12 @@ return {
     },
 
     {
+        name = "Peek Type Definitions",
+        cmd = "Glance type_definitions",
+        rtxt = "gpt",
+    },
+
+    {
         name = "Peek Implementations",
         cmd = "Glance implementations",
         rtxt = "gpi",
@@ -56,47 +62,50 @@ return {
 
     {
         name = "Document Symbols",
-        cmd = deferred(function()
-            require("mini.extra").pickers.lsp { scope = "document_symbol" }
-        end),
+        cmd = function() require("mini.extra").pickers.lsp({ scope = "document_symbol" }) end,
         rtxt = "gO",
     },
 
     {
         name = "Workspace Symbols",
-        cmd = deferred(function()
-            require("mini.extra").pickers.lsp { scope = "workspace_symbol" }
-        end),
-        rtxt = "<leader>vws",
-    },
-
-    {
-        name = "Hover Doc",
-        cmd = deferred(function() require("hover").open() end),
-        rtxt = "K",
+        cmd = function() require("mini.extra").pickers.lsp({ scope = "workspace_symbol" }) end,
+        rtxt = "gW",
     },
 
     { name = " separator" },
 
     {
-        name = "Show signature help",
+        name = "Show Signature Help",
         cmd = vim.lsp.buf.signature_help,
-        rtxt = "<C-s>",
+        rtxt = "gh",
     },
 
     {
-        name = "Run CodeLens",
-        cmd = vim.lsp.codelens.run,
-        rtxt = "grx",
+        name = "Format Buffer",
+        cmd = function()
+            local ok, conform = pcall(require, "conform")
+            if ok then conform.format({ lsp_fallback = true }) else vim.lsp.buf.format() end
+        end,
+        rtxt = "<leader>f",
     },
 
     {
-        name = "Add workspace folder",
-        cmd = vim.lsp.buf.add_workspace_folder,
+        name = "Code Actions",
+        cmd = deferred(function() require("actions-preview").code_actions() end),
+        rtxt = "<leader>ca",
     },
 
     {
-        name = "Remove workspace folder",
-        cmd = vim.lsp.buf.remove_workspace_folder,
+        name = "Rename Symbol",
+        cmd = deferred(function()
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<leader>grn", true, false, true), "n", false)
+        end),
+        rtxt = "<leader>grn",
+    },
+
+    {
+        name = "Restart LSP",
+        cmd = ":LspRestart",
+        rtxt = "lr",
     },
 }

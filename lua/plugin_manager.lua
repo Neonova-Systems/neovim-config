@@ -98,7 +98,7 @@ local config = {
         reset_packpath = true, -- reset the package path to improve startup time
         rtp = {
             reset = true,   -- reset the runtime path to $VIMRUNTIME and your config directory
-            paths = {},     -- add any custom paths here that you want to includes in the rtp -@type string[]
+            paths = { "/home/xaxeric/Workspace/neovim-config-worktree" },     -- add any custom paths here that you want to includes in the rtp -@type string[]
             disabled_plugins = { ---@type string[] list any plugins you want to disable here
                 -- "netrw",
                 -- "netrwPlugin",
@@ -208,5 +208,4 @@ local plugins = { -- List of plugins -- https://github.com/folke/lazy.nvim#-plug
 
 }
 
--- require("lazy").setup(plugins, config)
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", config)

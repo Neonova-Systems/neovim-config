@@ -32,7 +32,8 @@ return {
     {
         name = "Rename Symbol",
         cmd = deferred(function()
-            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<leader>grn", true, false, true), "n", false)
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<leader>grn", true, false, true),
+                "n", false)
         end),
         rtxt = "<leader>grn",
     },
@@ -40,74 +41,40 @@ return {
     { name = " separator" },
 
     {
-        name = "LSP Actions",
+        name = " LSP Actions",
         hl = "ExBlue",
         items = "lsp",
     },
 
+    { name = " separator" },
+
     {
-        name = "Git",
+        name = " Git Actions",
         hl = "ExGreen",
         items = "git",
     },
 
+    { name = " separator" },
+
     {
-        name = "Harpoon",
+        name = " Harpoon",
         hl = "ExYellow",
         items = "harpoon",
     },
 
+    { name = " separator" },
+
     {
-        name = "Pickers",
+        name = " Picker",
+        hl = "ExRed",
         items = "picker",
     },
 
+    { name = " separator" },
+
     {
-        name = "Diagnostics",
-        hl = "ExRed",
+        name = " Diagnostics",
+        hl = "ExLightGrey",
         items = "diagnostics",
-    },
-
-    { name = " separator" },
-
-    {
-        name = "Edit Config",
-        cmd = function()
-            vim.cmd "tabnew"
-            local conf = vim.fn.stdpath "config"
-            vim.cmd("tcd " .. conf .. " | e init.lua")
-        end,
-        rtxt = "ed",
-    },
-
-    {
-        name = "Copy Content",
-        cmd = "%y+",
-        rtxt = "yc",
-    },
-
-    {
-        name = "Delete Content",
-        cmd = "%d",
-        rtxt = "dc",
-    },
-
-    { name = " separator" },
-
-    {
-        name = "Open in terminal",
-        hl = "ExRed",
-        cmd = function()
-            local old_buf = require("menu.state").old_data.buf
-            local old_buf_dir = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(old_buf), ":h")
-
-            vim.cmd "enew"
-            vim.fn.termopen { vim.o.shell, "-c", "cd " .. vim.fn.shellescape(old_buf_dir) .. " ; " .. vim.o.shell }
-        end,
-    },
-
-    {
-        name = "Color Schemes",
-        cmd = deferred(function() require("mini.extra").pickers.colorschemes() end),
     },
 }

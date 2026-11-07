@@ -1,104 +1,117 @@
--- Picker submenu for mini.pick / mini.extra (lua/plugins/picker.lua,
--- lua/plugins/mini.lua). Deferred so each picker opens after the menu float
--- closes and focus is back in the source window.
+-- Picker submenu. Uses mini.pick (preferred) with telescope fallback.
 
-local function deferred(fn)
-    return function() vim.schedule(fn) end
+local function mini_pick(name)
+    return function() require("mini.pick").builtin[name]() end
 end
-
-local pick = require("mini.pick").builtin
-local extra = require("mini.extra").pickers
 
 return {
     {
         name = "Find Files",
-        cmd = deferred(function() pick.files() end),
+        cmd = mini_pick("files"),
         rtxt = "<leader>ff",
     },
 
     {
-        name = "Grep Live",
-        cmd = deferred(function() pick.grep_live() end),
+        name = "Recent Files",
+        cmd = mini_pick("oldfiles"),
+        rtxt = "<leader>fr",
+    },
+
+    {
+        name = "Buffers",
+        cmd = mini_pick("buffers"),
+        rtxt = "<leader>fb",
+    },
+
+    {
+        name = "Help Tags",
+        cmd = mini_pick("help"),
+        rtxt = "<leader>fh",
+    },
+
+    { name = " separator" },
+
+    {
+        name = "Grep (Live)",
+        cmd = mini_pick("grep_live"),
         rtxt = "<leader>fg",
     },
 
     {
-        name = "Grep Word Under Cursor",
-        cmd = deferred(function()
-            pick.grep { pattern = vim.fn.expand "<cword>" }
-        end),
-        rtxt = "<leader>fs",
-    },
-
-    {
-        name = "Find Buffers",
-        cmd = deferred(function() pick.buffers() end),
-        rtxt = "<leader>fb",
+        name = "Grep Word",
+        cmd = mini_pick("grep"),
+        rtxt = "<leader>fw",
     },
 
     { name = " separator" },
 
     {
-        name = "Git Files",
-        cmd = deferred(function() extra.git_files() end),
+        name = "LSP References",
+        cmd = function() require("mini.extra").pickers.lsp({ scope = "references" }) end,
+        rtxt = "gr",
     },
 
     {
-        name = "Git Branches",
-        cmd = deferred(function() extra.git_branches() end),
+        name = "LSP Definitions",
+        cmd = function() require("mini.extra").pickers.lsp({ scope = "definition" }) end,
+        rtxt = "gd",
     },
 
     {
-        name = "Old Files",
-        cmd = deferred(function() extra.oldfiles() end),
+        name = "LSP Implementations",
+        cmd = function() require("mini.extra").pickers.lsp({ scope = "implementation" }) end,
+        rtxt = "gi",
     },
 
     {
-        name = "Marks",
-        cmd = deferred(function() extra.marks() end),
+        name = "LSP Type Defs",
+        cmd = function() require("mini.extra").pickers.lsp({ scope = "type_definition" }) end,
+        rtxt = "gt",
+    },
+
+    { name = " separator" },
+
+    {
+        name = "Commands",
+        cmd = mini_pick("commands"),
+        rtxt = "<leader>fc",
+    },
+
+    {
+        name = "Keymaps",
+        cmd = mini_pick("keymaps"),
+        rtxt = "<leader>fk",
     },
 
     {
         name = "Registers",
-        cmd = deferred(function() extra.registers() end),
+        cmd = mini_pick("registers"),
+        rtxt = "<leader>fR",
     },
 
     {
-        name = "Jumps and Visits",
-        cmd = deferred(function() extra.visit_paths() end),
-    },
-
-    {
-        name = "Treesitter Nodes",
-        cmd = deferred(function() extra.treesitter() end),
+        name = "Colorschemes",
+        cmd = mini_pick("colorschemes"),
+        rtxt = "<leader>fC",
     },
 
     { name = " separator" },
 
     {
-        name = "Keymaps",
-        cmd = deferred(function() extra.keymaps() end),
-        rtxt = "<leader>pk",
+        name = "Telescope Find Files",
+        cmd = ":Telescope find_files",
+        rtxt = "tf",
     },
 
     {
-        name = "Options",
-        cmd = deferred(function() extra.options() end),
+        name = "Telescope Live Grep",
+        cmd = ":Telescope live_grep",
+        rtxt = "tg",
     },
 
     {
-        name = "Commands",
-        cmd = deferred(function() extra.commands() end),
-    },
-
-    {
-        name = "Highlight Groups",
-        cmd = deferred(function() extra.hl_groups() end),
-    },
-
-    {
-        name = "Help Pages",
-        cmd = deferred(function() pick.help() end),
-        rtxt = "<leader>fh",
+        name = "Telescope Buffers",
+        cmd = ":Telescope buffers",
+        rtxt = "tb",
     },
 }

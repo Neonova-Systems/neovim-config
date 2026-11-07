@@ -1,66 +1,67 @@
--- Harpoon submenu built on harpoon2 (configured in lua/plugins/harpoon.lua).
+-- Harpoon submenu. Uses ThePrimeagen/harpoon (v2 API).
 
-local harpoon = require "harpoon"
-
--- Harpoon stores entries as root-relative paths, so an item for the current
--- file has to be normalized the same way (harpoon/config.lua normalize_path).
-local function current_item()
-    return harpoon:list().config:create_list_item()
+local function harpoon_available()
+    return pcall(require, "harpoon")
 end
 
 return {
     {
         name = "Add File",
-        cmd = function() harpoon:list():add() end,
-        rtxt = "<leader>a",
+        cmd = function() if harpoon_available() then require("harpoon"):list():add() end end,
+        rtxt = "ha",
     },
 
     {
-        name = "Remove File",
-        cmd = function() harpoon:list():remove(current_item()) end,
-    },
-
-    {
-        name = "Toggle Quick Menu",
-        cmd = function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
-        rtxt = "<C-e>",
+        name = "Quick Menu",
+        cmd = function() if harpoon_available() then require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end end,
+        rtxt = "hm",
     },
 
     { name = " separator" },
 
     {
-        name = "Slot 1",
-        cmd = function() harpoon:list():select(1) end,
-        rtxt = "<C-h>",
+        name = "File 1",
+        cmd = function() if harpoon_available() then require("harpoon"):list():select(1) end end,
+        rtxt = "h1",
     },
 
     {
-        name = "Slot 2",
-        cmd = function() harpoon:list():select(2) end,
-        rtxt = "<C-j>",
+        name = "File 2",
+        cmd = function() if harpoon_available() then require("harpoon"):list():select(2) end end,
+        rtxt = "h2",
     },
 
     {
-        name = "Slot 3",
-        cmd = function() harpoon:list():select(3) end,
-        rtxt = "<C-k>",
+        name = "File 3",
+        cmd = function() if harpoon_available() then require("harpoon"):list():select(3) end end,
+        rtxt = "h3",
     },
 
     {
-        name = "Slot 4",
-        cmd = function() harpoon:list():select(4) end,
-        rtxt = "<C-l>",
+        name = "File 4",
+        cmd = function() if harpoon_available() then require("harpoon"):list():select(4) end end,
+        rtxt = "h4",
     },
 
     { name = " separator" },
 
     {
         name = "Next File",
-        cmd = function() harpoon:list():next() end,
+        cmd = function() if harpoon_available() then require("harpoon"):list():next() end end,
+        rtxt = "hn",
     },
 
     {
         name = "Prev File",
-        cmd = function() harpoon:list():prev() end,
+        cmd = function() if harpoon_available() then require("harpoon"):list():prev() end end,
+        rtxt = "hp",
+    },
+
+    { name = " separator" },
+
+    {
+        name = "Clear All",
+        cmd = function() if harpoon_available() then require("harpoon"):list():clear() end end,
+        rtxt = "hC",
     },
 }

@@ -1,73 +1,89 @@
--- Diagnostics submenu built on vim.diagnostic and the mini.extra picker.
+-- Diagnostics submenu. Uses vim.diagnostic and mini.extra pickers.
 
-local severity = vim.diagnostic.severity
-
--- Defer until the menu float is closed and focus is restored.
 local function deferred(fn)
     return function() vim.schedule(fn) end
 end
 
 return {
     {
-        name = "Float at Cursor",
-        cmd = vim.diagnostic.open_float,
-        rtxt = "<leader>vd",
+        name = "Document Diagnostics",
+        cmd = function() require("mini.extra").pickers.diagnostic({ scope = "current" }) end,
+        rtxt = "dd",
     },
 
     {
-        name = "All Diagnostics",
-        cmd = deferred(function()
-            require("mini.extra").pickers.diagnostic { scope = "all" }
-        end),
-        rtxt = "<leader>xx",
-    },
-
-    {
-        name = "Buffer Diagnostics",
-        cmd = deferred(function()
-            require("mini.extra").pickers.diagnostic { scope = "current" }
-        end),
+        name = "Workspace Diagnostics",
+        cmd = function() require("mini.extra").pickers.diagnostic({ scope = "all" }) end,
+        rtxt = "dD",
     },
 
     { name = " separator" },
 
     {
         name = "Next Diagnostic",
-        cmd = function() vim.diagnostic.jump { count = 1 } end,
+        cmd = function() vim.diagnostic.goto_next({ float = false }) end,
         rtxt = "]d",
     },
 
     {
         name = "Prev Diagnostic",
-        cmd = function() vim.diagnostic.jump { count = -1 } end,
+        cmd = function() vim.diagnostic.goto_prev({ float = false }) end,
         rtxt = "[d",
+    },
+
+    {
+        name = "Next Error",
+        cmd = function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR, float = false }) end,
+        rtxt = "]e",
+    },
+
+    {
+        name = "Prev Error",
+        cmd = function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR, float = false }) end,
+        rtxt = "[e",
     },
 
     { name = " separator" },
 
     {
-        name = "Errors only",
+        name = "Open Float",
+        cmd = vim.diagnostic.open_float,
+        rtxt = "gk",
+    },
+
+    {
+        name = "Set Loclist",
+        cmd = vim.diagnostic.setloclist,
+        rtxt = "dl",
+    },
+
+    {
+        name = "Set Qflist",
+        cmd = vim.diagnostic.setqflist,
+        rtxt = "dq",
+    },
+
+    { name = " separator" },
+
+    {
+        name = "Toggle Virtual Text",
         cmd = function()
             local cfg = vim.diagnostic.config()
-            cfg.virtual_text = not cfg.virtual_text
-            vim.diagnostic.config(cfg)
-            vim.notify("Diagnostics virtual text: " .. (cfg.virtual_text and "on" or "off"))
+            local vt = cfg and cfg.virtual_text
+            vim.diagnostic.config({ virtual_text = not vt })
+            vim.notify("Virtual text: " .. (not vt and "on" or "off"))
         end,
+        rtxt = "dt",
     },
 
     {
-        name = "Set Error Level",
+        name = "Toggle Underline",
         cmd = function()
-            vim.diagnostic.config { float = { severity = severity.ERROR } }
-            vim.notify "Diagnostic float severity: Error"
+            local cfg = vim.diagnostic.config()
+            local ul = cfg and cfg.underline
+            vim.diagnostic.config({ underline = not ul })
+            vim.notify("Underline: " .. (not ul and "on" or "off"))
         end,
-    },
-
-    {
-        name = "Set Warn Level",
-        cmd = function()
-            vim.diagnostic.config { float = { severity = severity.WARN } }
-            vim.notify "Diagnostic float severity: Warning"
-        end,
+        rtxt = "du",
     },
 }

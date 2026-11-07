@@ -75,17 +75,6 @@ vim.keymap.set("c", "<C-BS>", "<C-w>", { remap = false }) -- Delete word backwar
 
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
--- Floating context menu (vendored nvzone/menu, see lua/menu/ and lua/menus/)
-vim.keymap.set("n", "<C-t>", function() require("menu").open("default") end, { desc = "Open context menu" })
-vim.keymap.set({ "n", "v" }, "<RightMouse>", function()
-    require("menu.utils").delete_old_menus()
-
-    -- Feed the original right-click through so the click still positions the cursor
-    vim.cmd.exec '"normal! \\<RightMouse>"'
-
-    require("menu").open("default", { mouse = true })
-end, { desc = "Open context menu at mouse" })
-
 local function copy_ref(opts)
     local path = vim.fn.expand("%:.") -- "%" is the current buffer's file name; ":." makes it relative to the cwd
     local ref = path                  -- ref is what ends up in the clipboard; start with just the path
