@@ -28,8 +28,8 @@ return {
             return function() require("telescope.builtin")[name]() end
         end
 
-        local function picker_lsp(builtin)
-            return function() require("telescope.builtin")[builtin]() end
+        local function telescope_lsp(name)
+            return function() require("telescope.builtin")[name]() end
         end
 
         local function picker_diagnostic()
@@ -176,12 +176,12 @@ return {
                 items = {
                     {
                         name = "Document Symbols",
-                        cmd = picker_lsp("document_symbol"),
+                        cmd = telescope_lsp("lsp_document_symbols"),
                         rtxt = "gO",
                     },
                     {
                         name = "Workspace Symbols",
-                        cmd = picker_lsp("workspace_symbol"),
+                        cmd = telescope_lsp("lsp_dynamic_workspace_symbols"),
                         rtxt = "<leader>vws",
                     },
                 },
