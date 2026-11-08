@@ -15,11 +15,7 @@ return {
         require("mini.bracketed").setup()
         require("mini.ai").setup()
         require("mini.splitjoin").setup()
-        require("mini.files").setup()
         require('mini.operators').setup()
-        require("mini.extra").setup()
-        require("mini.jump2d").setup()
-        require("mini.cursorword").setup()
         require("mini.cmdline").setup({ autocomplete = { enable = true, delay = 150 }, autocorrect = { enable = false } })
         require("mini.surround").setup({
             -- Module mappings. Use `''` (empty string) to disable one.
@@ -35,6 +31,18 @@ return {
                 suffix_next = 'n',
             },
         })
+        require("mini.files").setup({
+            mappings = {
+                close = '<Esc>',
+                go_in = "<CR>",
+                go_in_plus = "L",
+                go_out = "_",
+                go_out_plus = "H",
+            },
+            options = {
+                use_treeview = true,
+            },
+        })
 
         local MiniNotify = require("mini.notify")
         MiniNotify.setup({
@@ -43,6 +51,9 @@ return {
             }
         })
 
+        require("mini.extra").setup()
+        require("mini.cursorword").setup()
+        require("mini.jump2d").setup()
         require('mini.indentscope').setup({ symbol = "│", options = { try_as_border = true }, })
         local miniclue = require('mini.clue')
         miniclue.setup({
