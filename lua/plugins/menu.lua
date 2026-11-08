@@ -50,6 +50,7 @@ return {
             })
         end
 
+        -- Submenu: Harpoon
         local harpoon_submenu = {
             {
                 name = "Add File",
@@ -124,12 +125,82 @@ return {
             },
         }
 
-        local menu_items = {
+        -- Submenu: LSP
+        local lsp_submenu = {
             {
-                name = "Format Buffer",
-                cmd = format_buffer,
-                rtxt = "<leader>f",
+                name = "Goto",
+                hl = "ExBlue",
+                items = {
+                    {
+                        name = "Goto Definition",
+                        cmd = vim.lsp.buf.definition,
+                        rtxt = "gd",
+                    },
+                    {
+                        name = "Goto Declaration",
+                        cmd = vim.lsp.buf.declaration,
+                        rtxt = "gD",
+                    },
+                    {
+                        name = "Goto Implementation",
+                        cmd = vim.lsp.buf.implementation,
+                        rtxt = "gri",
+                    },
+                    {
+                        name = "Goto Type Definition",
+                        cmd = vim.lsp.buf.type_definition,
+                        rtxt = "grt",
+                    },
+                    {
+                        name = "References",
+                        cmd = deferred(lsp_references_qf),
+                        rtxt = "grr",
+                    },
+                },
             },
+            {
+                name = "Peek",
+                hl = "ExBlue",
+                items = {
+                    {
+                        name = "Peek Definitions",
+                        cmd = "Glance definitions",
+                        rtxt = "gpd",
+                    },
+                    {
+                        name = "Peek References",
+                        cmd = "Glance references",
+                        rtxt = "gpr",
+                    },
+                    {
+                        name = "Peek Type Definitions",
+                        cmd = "Glance type_definitions",
+                        rtxt = "gpy",
+                    },
+                    {
+                        name = "Peek Implementations",
+                        cmd = "Glance implementations",
+                        rtxt = "gpi",
+                    },
+                },
+            },
+            {
+                name = "Symbols",
+                hl = "ExBlue",
+                items = {
+                    {
+                        name = "Document Symbols",
+                        cmd = picker_lsp("document_symbol"),
+                        rtxt = "gO",
+                    },
+                    {
+                        name = "Workspace Symbols",
+                        cmd = picker_lsp("workspace_symbol"),
+                        rtxt = "<leader>vws",
+                    },
+                },
+            },
+            { name = "separator" },
             {
                 name = "Code Actions",
                 cmd = deferred(function() require("actions-preview").code_actions() end),
@@ -142,64 +213,6 @@ return {
                 end),
                 rtxt = "<leader>grn",
             },
-            { name = "separator" },
-            {
-                name = "Goto Definition",
-                cmd = vim.lsp.buf.definition,
-                rtxt = "gd",
-            },
-            {
-                name = "Goto Declaration",
-                cmd = vim.lsp.buf.declaration,
-                rtxt = "gD",
-            },
-            {
-                name = "Goto Implementation",
-                cmd = vim.lsp.buf.implementation,
-                rtxt = "gri",
-            },
-            {
-                name = "Goto Type Definition",
-                cmd = vim.lsp.buf.type_definition,
-                rtxt = "grt",
-            },
-            {
-                name = "References",
-                cmd = deferred(lsp_references_qf),
-                rtxt = "grr",
-            },
-            { name = "separator" },
-            {
-                name = "Peek Definitions",
-                cmd = "Glance definitions",
-                rtxt = "gpd",
-            },
-            {
-                name = "Peek References",
-                cmd = "Glance references",
-                rtxt = "gpr",
-            },
-            {
-                name = "Peek Type Definitions",
-                cmd = "Glance type_definitions",
-                rtxt = "gpy",
-            },
-            {
-                name = "Peek Implementations",
-                cmd = "Glance implementations",
-                rtxt = "gpi",
-            },
-            { name = "separator" },
-            {
-                name = "Document Symbols",
-                cmd = picker_lsp("document_symbol"),
-                rtxt = "gO",
-            },
-            {
-                name = "Workspace Symbols",
-                cmd = picker_lsp("workspace_symbol"),
-                rtxt = "<leader>vws",
-            },
             {
                 name = "Show Signature Help",
                 cmd = vim.lsp.buf.signature_help,
@@ -210,15 +223,40 @@ return {
                 cmd = function() require("hover").open() end,
                 rtxt = "K",
             },
+            { name = "separator" },
             {
                 name = "Restart LSP",
                 cmd = ":LspRestart",
             },
-            { name = "separator" },
+        }
+
+        -- Submenu: Git
+        local git_submenu = {
             {
-                name = "Harpoon",
+                name = "Hunks",
                 hl = "ExBlue",
-                items = harpoon_submenu,
+                items = {
+                    {
+                        name = "Apply Hunks",
+                        cmd = function() require("mini.diff").do_hunks(0, "apply") end,
+                        rtxt = "gh",
+                    },
+                    {
+                        name = "Reset Hunks",
+                        cmd = function() require("mini.diff").do_hunks(0, "reset") end,
+                        rtxt = "gH",
+                    },
+                    {
+                        name = "Next Hunk",
+                        cmd = function() require("mini.diff").goto_hunk("next") end,
+                        rtxt = "]h",
+                    },
+                    {
+                        name = "Prev Hunk",
+                        cmd = function() require("mini.diff").goto_hunk("prev") end,
+                        rtxt = "[h",
+                    },
+                },
             },
             { name = "separator" },
             {
@@ -227,31 +265,11 @@ return {
                 rtxt = "<leader>go",
             },
             {
-                name = "Apply Hunks",
-                cmd = function() require("mini.diff").do_hunks(0, "apply") end,
-                rtxt = "gh",
-            },
-            {
-                name = "Reset Hunks",
-                cmd = function() require("mini.diff").do_hunks(0, "reset") end,
-                rtxt = "gH",
-            },
-            {
-                name = "Next Hunk",
-                cmd = function() require("mini.diff").goto_hunk("next") end,
-                rtxt = "]h",
-            },
-            {
-                name = "Prev Hunk",
-                cmd = function() require("mini.diff").goto_hunk("prev") end,
-                rtxt = "[h",
-            },
-            { name = "separator" },
-            {
                 name = "Git Data at Cursor",
                 cmd = function() require("mini.git").show_at_cursor() end,
                 rtxt = "<leader>gc",
             },
+            { name = "separator" },
             {
                 name = "Git Status",
                 cmd = ":Git status",
@@ -268,140 +286,217 @@ return {
                 name = "Git Pull",
                 cmd = ":Git pull",
             },
+        }
+
+        -- Submenu: Picker
+        local picker_submenu = {
+            {
+                name = "Files",
+                hl = "ExBlue",
+                items = {
+                    {
+                        name = "Find Files",
+                        cmd = mini_pick("files"),
+                        rtxt = "<leader>ff",
+                    },
+                    {
+                        name = "Recent Files",
+                        cmd = mini_extra("oldfiles"),
+                    },
+                    {
+                        name = "Buffers",
+                        cmd = mini_pick("buffers"),
+                        rtxt = "<leader>fb",
+                    },
+                    {
+                        name = "Help Tags",
+                        cmd = mini_pick("help"),
+                        rtxt = "<leader>fh",
+                    },
+                },
+            },
+            {
+                name = "Grep",
+                hl = "ExBlue",
+                items = {
+                    {
+                        name = "Grep (Live)",
+                        cmd = mini_pick("grep_live"),
+                        rtxt = "<leader>fg",
+                    },
+                    {
+                        name = "Grep Word",
+                        cmd = deferred(function()
+                            local word = vim.fn.expand("<cword>")
+                            if word == "" then return end
+                            local root = vim.fs.root(0, { ".git", "Makefile", "package.json" }) or vim.fn.getcwd()
+                            require("mini.pick").builtin.grep({ pattern = word, source = { cwd = root } })
+                        end),
+                        rtxt = "<leader>fw",
+                    },
+                },
+            },
+            {
+                name = "LSP",
+                hl = "ExBlue",
+                items = {
+                    {
+                        name = "LSP References",
+                        cmd = picker_lsp("references"),
+                    },
+                    {
+                        name = "LSP Definitions",
+                        cmd = picker_lsp("definition"),
+                    },
+                    {
+                        name = "LSP Implementations",
+                        cmd = picker_lsp("implementation"),
+                    },
+                    {
+                        name = "LSP Type Defs",
+                        cmd = picker_lsp("type_definition"),
+                    },
+                },
+            },
+            {
+                name = "Misc",
+                hl = "ExBlue",
+                items = {
+                    {
+                        name = "Commands",
+                        cmd = mini_extra("commands"),
+                    },
+                    {
+                        name = "Keymaps",
+                        cmd = mini_extra("keymaps"),
+                        rtxt = "<leader>fk",
+                    },
+                    {
+                        name = "Registers",
+                        cmd = mini_extra("registers"),
+                    },
+                    {
+                        name = "Colorschemes",
+                        cmd = mini_extra("colorschemes"),
+                    },
+                },
+            },
+        }
+
+        -- Submenu: Diagnostics
+        local diagnostics_submenu = {
+            {
+                name = "Pickers",
+                hl = "ExBlue",
+                items = {
+                    {
+                        name = "Document Diagnostics",
+                        cmd = picker_diagnostic("current"),
+                        rtxt = "<leader>fd",
+                    },
+                    {
+                        name = "Workspace Diagnostics",
+                        cmd = picker_diagnostic("all"),
+                    },
+                },
+            },
+            {
+                name = "Navigation",
+                hl = "ExBlue",
+                items = {
+                    {
+                        name = "Next Diagnostic",
+                        cmd = function() vim.diagnostic.goto_next({ float = false }) end,
+                        rtxt = "]d",
+                    },
+                    {
+                        name = "Prev Diagnostic",
+                        cmd = function() vim.diagnostic.goto_prev({ float = false }) end,
+                        rtxt = "[d",
+                    },
+                    {
+                        name = "Next Error",
+                        cmd = function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR, float = false }) end,
+                        rtxt = "]e",
+                    },
+                    {
+                        name = "Prev Error",
+                        cmd = function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR, float = false }) end,
+                        rtxt = "[e",
+                    },
+                    { name = "separator" },
+                    {
+                        name = "Open Float",
+                        cmd = vim.diagnostic.open_float,
+                        rtxt = "]D",
+                    },
+                    {
+                        name = "Set Loclist",
+                        cmd = vim.diagnostic.setloclist,
+                    },
+                    {
+                        name = "Set Qflist",
+                        cmd = vim.diagnostic.setqflist,
+                    },
+                },
+            },
+            {
+                name = "Toggles",
+                hl = "ExBlue",
+                items = {
+                    {
+                        name = "Toggle Virtual Text",
+                        cmd = function()
+                            local cfg = vim.diagnostic.config()
+                            local vt = cfg and cfg.virtual_text
+                            vim.diagnostic.config({ virtual_text = not vt })
+                            vim.notify("Virtual text: " .. (not vt and "on" or "off"))
+                        end,
+                    },
+                    {
+                        name = "Toggle Underline",
+                        cmd = function()
+                            local cfg = vim.diagnostic.config()
+                            local ul = cfg and cfg.underline
+                            vim.diagnostic.config({ underline = not ul })
+                            vim.notify("Underline: " .. (not ul and "on" or "off"))
+                        end,
+                    },
+                },
+            },
+        }
+
+        local menu_items = {
+            {
+                name = "Format Buffer",
+                cmd = format_buffer,
+                rtxt = "<leader>f",
+            },
             { name = "separator" },
             {
-                name = "Find Files",
-                cmd = mini_pick("files"),
-                rtxt = "<leader>ff",
+                name = "LSP",
+                hl = "ExBlue",
+                items = lsp_submenu,
             },
             {
-                name = "Recent Files",
-                cmd = mini_extra("oldfiles"),
+                name = "Git",
+                hl = "ExBlue",
+                items = git_submenu,
             },
             {
-                name = "Buffers",
-                cmd = mini_pick("buffers"),
-                rtxt = "<leader>fb",
+                name = "Picker",
+                hl = "ExBlue",
+                items = picker_submenu,
             },
             {
-                name = "Help Tags",
-                cmd = mini_pick("help"),
-                rtxt = "<leader>fh",
-            },
-            { name = "separator" },
-            {
-                name = "Grep (Live)",
-                cmd = mini_pick("grep_live"),
-                rtxt = "<leader>fg",
+                name = "Diagnostics",
+                hl = "ExBlue",
+                items = diagnostics_submenu,
             },
             {
-                name = "Grep Word",
-                cmd = deferred(function()
-                    local word = vim.fn.expand("<cword>")
-                    if word == "" then return end
-                    local root = vim.fs.root(0, { ".git", "Makefile", "package.json" }) or vim.fn.getcwd()
-                    require("mini.pick").builtin.grep({ pattern = word, source = { cwd = root } })
-                end),
-                rtxt = "<leader>fw",
-            },
-            { name = "separator" },
-            {
-                name = "LSP References",
-                cmd = picker_lsp("references"),
-            },
-            {
-                name = "LSP Definitions",
-                cmd = picker_lsp("definition"),
-            },
-            {
-                name = "LSP Implementations",
-                cmd = picker_lsp("implementation"),
-            },
-            {
-                name = "LSP Type Defs",
-                cmd = picker_lsp("type_definition"),
-            },
-            { name = "separator" },
-            {
-                name = "Commands",
-                cmd = mini_extra("commands"),
-            },
-            {
-                name = "Keymaps",
-                cmd = mini_extra("keymaps"),
-                rtxt = "<leader>fk",
-            },
-            {
-                name = "Registers",
-                cmd = mini_extra("registers"),
-            },
-            {
-                name = "Colorschemes",
-                cmd = mini_extra("colorschemes"),
-            },
-            { name = "separator" },
-            {
-                name = "Document Diagnostics",
-                cmd = picker_diagnostic("current"),
-                rtxt = "<leader>fd",
-            },
-            {
-                name = "Workspace Diagnostics",
-                cmd = picker_diagnostic("all"),
-            },
-            { name = "separator" },
-            {
-                name = "Next Diagnostic",
-                cmd = function() vim.diagnostic.goto_next({ float = false }) end,
-                rtxt = "]d",
-            },
-            {
-                name = "Prev Diagnostic",
-                cmd = function() vim.diagnostic.goto_prev({ float = false }) end,
-                rtxt = "[d",
-            },
-            {
-                name = "Next Error",
-                cmd = function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR, float = false }) end,
-                rtxt = "]e",
-            },
-            {
-                name = "Prev Error",
-                cmd = function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR, float = false }) end,
-                rtxt = "[e",
-            },
-            { name = "separator" },
-            {
-                name = "Open Float",
-                cmd = vim.diagnostic.open_float,
-                rtxt = "]D",
-            },
-            {
-                name = "Set Loclist",
-                cmd = vim.diagnostic.setloclist,
-            },
-            {
-                name = "Set Qflist",
-                cmd = vim.diagnostic.setqflist,
-            },
-            { name = "separator" },
-            {
-                name = "Toggle Virtual Text",
-                cmd = function()
-                    local cfg = vim.diagnostic.config()
-                    local vt = cfg and cfg.virtual_text
-                    vim.diagnostic.config({ virtual_text = not vt })
-                    vim.notify("Virtual text: " .. (not vt and "on" or "off"))
-                end,
-            },
-            {
-                name = "Toggle Underline",
-                cmd = function()
-                    local cfg = vim.diagnostic.config()
-                    local ul = cfg and cfg.underline
-                    vim.diagnostic.config({ underline = not ul })
-                    vim.notify("Underline: " .. (not ul and "on" or "off"))
-                end,
+                name = "Harpoon",
+                hl = "ExBlue",
+                items = harpoon_submenu,
             },
         }
 
