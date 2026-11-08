@@ -10,7 +10,7 @@ return {
             layout = {
                 align = "center",
             },
-            window = {
+            win = {
                 border = "single",
                 winblend = 0,
             },
