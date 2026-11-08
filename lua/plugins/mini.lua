@@ -36,8 +36,19 @@ return {
         local MiniNotify = require("mini.notify")
         MiniNotify.setup({
             content = {
-                format = function(notif) return notif.msg end,
-            }
+                format = function(notif)
+                    local level = notif.level or "INFO"
+                    return string.format("[%s] %s", level, notif.msg)
+                end,
+            },
+        })
+        -- Per-level durations and highlight groups via make_notify
+        vim.notify = MiniNotify.make_notify({
+            ERROR = { duration = 10000, hl_group = "DiagnosticError" },
+            WARN  = { duration = 8000,  hl_group = "DiagnosticWarn"  },
+            INFO  = { duration = 5000,  hl_group = "DiagnosticInfo"  },
+            DEBUG = { duration = 3000,  hl_group = "DiagnosticHint" },
+            TRACE = { duration = 3000,  hl_group = "DiagnosticHint" },
         })
 
         require("mini.extra").setup()
