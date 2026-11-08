@@ -1,5 +1,6 @@
 return {
     "nvim-mini/mini.nvim",
+    dependencies = { "rafamadriz/friendly-snippets" },
     keys = {
         { "-", function() require("mini.files").open() end, desc = "Toggle mini file explorer" },
         { "<leader>-", function()
