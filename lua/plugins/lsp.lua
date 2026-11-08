@@ -113,8 +113,10 @@ return {
         "smjonas/inc-rename.nvim",
         config = function()
             require("inc_rename").setup()
-            vim.keymap.set("n", "<leader>grn", function() return ":IncRename " .. vim.fn.expand("<cword>") end,
-                { expr = true, desc = "LSP Rename" })
+            -- grn is the standard nvim-lsp rename keymap; reuse it for inc-rename
+            -- so the live-preview rename workflow is reachable without a new binding.
+            vim.keymap.set("n", "grn", function() return ":IncRename " .. vim.fn.expand("<cword>") end,
+                { expr = true, desc = "LSP Rename (live preview)" })
         end,
     },
     {

@@ -9,3 +9,4 @@ vim.cmd([[ syntax keyword sshalg ssh-rsa ]])
 vim.cmd([[ highlight link sshalg Identifier ]])
 vim.cmd([[ syntax match sshknownhostsip "\<\(\d\{1,3}\.\)\{3}\d\{1,3}\>" ]])
 vim.cmd([[ hi link sshknownhostsip Constant ]])
+
