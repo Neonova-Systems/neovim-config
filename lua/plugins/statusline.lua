@@ -61,7 +61,7 @@ return {
                 if type == "function_definition" or type == "function_declaration"
                     or type == "method_definition" or type == "class_definition"
                     or type == "struct_item" or type == "impl_item"
-                    or type == "function_item" or type == "function_call" then
+                    or type == "function_item" then
                     local text = vim.treesitter.get_node_text(parent, 0)
                     if text and text[1] then
                         return "  " .. lang .. " " .. text[1]:sub(1, 40)

@@ -40,16 +40,6 @@ return {
             return function() require("mini.extra").pickers.diagnostic({ scope = scope }) end
         end
 
-        local function lsp_references_qf()
-            local params = { context = { includeDeclaration = true } }
-            vim.lsp.buf.references(params, {
-                on_list = function(options)
-                    vim.fn.setqflist({}, " ", options)
-                    vim.cmd("copen")
-                end,
-            })
-        end
-
         -- Submenu: Harpoon
         local harpoon_submenu = {
             {
@@ -153,7 +143,7 @@ return {
                     },
                     {
                         name = "References",
-                        cmd = deferred(lsp_references_qf),
+                        cmd = deferred(function() require("config.actions").lsp_references_qf() end),
                         rtxt = "grr",
                     },
                 },
@@ -326,12 +316,7 @@ return {
                     },
                     {
                         name = "Grep Word",
-                        cmd = deferred(function()
-                            local word = vim.fn.expand("<cword>")
-                            if word == "" then return end
-                            local root = vim.fs.root(0, { ".git", "Makefile", "package.json" }) or vim.fn.getcwd()
-                            require("mini.pick").builtin.grep({ pattern = word, source = { cwd = root } })
-                        end),
+                        cmd = deferred(function() require("config.actions").grep_word_at_root() end),
                         rtxt = "<leader>fw",
                     },
                 },

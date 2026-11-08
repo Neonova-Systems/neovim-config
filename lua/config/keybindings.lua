@@ -1,10 +1,6 @@
 -- Remap
 vim.g.mapleader = " " -- Set Space as <leader> key
 -- vim.keymap.set('n', ';', ':', {noremap = true})
-vim.keymap.set('', '<Up>', '<Nop>', { noremap = true })
-vim.keymap.set('', '<Down>', '<Nop>', { noremap = true })
-vim.keymap.set('', '<Left>', '<Nop>', { noremap = true })
-vim.keymap.set('', '<Right>', '<Nop>', { noremap = true })
 vim.keymap.set("x", "p", [[_dP]], { desc = "Paste over selection without overwriting the default register" })
 vim.keymap.set("v", "p", '"_dP')
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to blackhole register" })

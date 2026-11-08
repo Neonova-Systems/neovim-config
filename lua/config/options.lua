@@ -76,7 +76,8 @@ vim.opt.winhighlight = "SpecialKey:SpecialKeyWin"                   -- Window-lo
 vim.opt.textwidth = 0                                               -- Maximum width of text that is being inserted.  A longer line will be broken after white space to get this width.  A zero value disables this.
 vim.opt.buftype = ""
 vim.opt.foldopen = vim.opt.foldopen + 'jump'                        -- Specifies for which type of commands folds will be opened, if the command moves the cursor into a closed fold.  It is a comma-separated list of items.
-vim.opt.fillchars = [[diff:/,eob: ,fold: ,foldopen:▼,foldsep: ,foldclose:▶]] -- Characters to fill the statuslines and vertical separators. vim.opt.diffopt = [[filler,internal,algorithm:histogram,indent-heuristic,iwhite,closeoff,vertical]] -- Option settings for diff mode. It can consist of the following items. All are optional.  Items must be separated by a comma.
+vim.opt.fillchars = [[diff:/,eob: ,fold: ,foldopen:▼,foldsep: ,foldclose:▶]] -- Characters to fill the statuslines and vertical separators.
+vim.opt.diffopt = [[filler,internal,algorithm:histogram,indent-heuristic,iwhite,closeoff,vertical]] -- Option settings for diff mode.
 vim.opt.listchars = { eol = "↲", tab = "▶ ", trail = "•", precedes = "«", extends = "»", nbsp = "␣", space = " " } -- Strings to use in 'list' mode and for the :list command. It is a comma-separated list of string settings.
 ---@diagnostic disable-next-line: inject-field
 vim.g.netrw_banner = 0                                                      -- Disable netrw banner
