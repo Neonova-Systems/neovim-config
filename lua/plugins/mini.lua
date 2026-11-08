@@ -29,8 +29,8 @@ return {
                 highlight = 'sh',  -- Highlight surrounding
                 replace = 'sr',    -- Replace surrounding
 
-                suffix_last = 'l', -- Suffix to search with "prev" method
-                suffix_next = 'n', -- Suffix to search with "next" method
+                suffix_last = 'l',
+                suffix_next = 'n',
             },
         })
         require("mini.files").setup({
@@ -40,23 +40,17 @@ return {
                 go_in_plus = "L",
                 go_out = "_",
                 go_out_plus = "H",
-            }
+            },
+            options = {
+                use_treeview = true,
+            },
         })
+
         local MiniNotify = require("mini.notify")
         MiniNotify.setup({
             content = {
-                format = function(notif) return notif.msg end, -- only show messages
+                format = function(notif) return notif.msg end,
             }
-        })
-
-        -- Errors and warnings stay on screen until dismissed instead of vanishing
-        -- after a few seconds, which makes them impossible to read while debugging.
-        -- duration <= 0 is treated by mini.notify as "never show", so a large
-        -- finite value is used to approximate persistent.
-        vim.notify = MiniNotify.make_notify({
-            ERROR = { duration = 60000, hl_group = "DiagnosticError" },
-            WARN  = { duration = 60000, hl_group = "DiagnosticWarn" },
-            INFO  = { duration = 5000, hl_group = "DiagnosticInfo" },
         })
 
         require("mini.extra").setup()
