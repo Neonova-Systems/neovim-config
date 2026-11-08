@@ -23,7 +23,9 @@ return {
         end
     end,
     config = function()
-        require("nvim-treesitter").setup()
+        require("nvim-treesitter").setup({
+            highlight = { enable = true },
+        })
         vim.api.nvim_create_autocmd("FileType", {
             pattern = "*",
             callback = function(args)
@@ -40,7 +42,13 @@ return {
                     return
                 end
 
-                pcall(vim.treesitter.start, buf, lang)
+                -- vim.treesitter.start creates a parser but does NOT enable
+                -- highlighting unless explicitly asked. Without this, the
+                -- parser runs (TSNode queries work) but every token renders
+                -- in the default Normal fg color — the flat white you saw.
+                pcall(vim.treesitter.start, buf, lang, {
+                    highlight = { enable = true },
+                })
             end,
         })
     end,
