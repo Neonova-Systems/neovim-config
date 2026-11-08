@@ -40,58 +40,7 @@ return {
                 go_in_plus = "L",
                 go_out = "_",
                 go_out_plus = "H",
-            },
-            content = function()
-                local MiniFiles = require("mini.files")
-                local fs = vim.fs
-                local cwd = vim.fn.getcwd()
-                local entries = {}
-                local function scan(dir, depth)
-                    local handle = vim.uv.fs_scandir(dir)
-                    if not handle then return end
-                    local items = {}
-                    while true do
-                        local name, type = vim.uv.fs_scandir_next(handle, name)
-                        if not name then break end
-                        if name ~= "." and name ~= ".." then
-                            table.insert(items, { name = name, type = type, path = dir .. "/" .. name })
-                        end
-                    end
-                    table.sort(items, function(a, b)
-                        if a.type ~= b.type then return a.type == "directory" end
-                        return a.name < b.name
-                    end)
-                    for _, item in ipairs(items) do
-                        local prefix = string.rep("  ", depth)
-                        local icon, hl
-                        if item.type == "directory" then
-                            icon, hl = "", "MiniFilesDirectory"
-                        else
-                            local ext = item.name:match("%.([^.]+)$")
-                            if ext == "lua" then icon, hl = "", "MiniFilesLua"
-                            elseif ext == "js" or ext == "ts" or ext == "jsx" or ext == "tsx" then icon, hl = "", "MiniFilesJs"
-                            elseif ext == "py" then icon, hl = "", "MiniFilesPy"
-                            elseif ext == "go" then icon, hl = "", "MiniFilesGo"
-                            elseif ext == "rs" then icon, hl = "", "MiniFilesRs"
-                            elseif ext == "c" or ext == "h" or ext == "cpp" or ext == "hpp" then icon, hl = "", "MiniFilesC"
-                            elseif ext == "json" or ext == "yaml" or ext == "yml" or ext == "toml" then icon, hl = "", "MiniFilesConfig"
-                            elseif ext == "md" or ext == "txt" then icon, hl = "", "MiniFilesText"
-                            elseif ext == "git" or item.name == ".git" then icon, hl = "", "MiniFilesGit"
-                            else icon, hl = "", "MiniFilesFile"
-                        end
-                        table.insert(entries, { prefix = prefix, icon = icon, name = item.name, hl = hl, path = item.path, type = item.type })
-                        if item.type == "directory" and depth < 2 then
-                            scan(item.path, depth + 1)
-                        end
-                    end
-                end
-                scan(cwd, 0)
-                local lines = {}
-                for _, e in ipairs(entries) do
-                    table.insert(lines, e.prefix .. e.icon .. " " .. e.name)
-                end
-                return lines
-            end,
+            }
         })
         local MiniNotify = require("mini.notify")
         MiniNotify.setup({

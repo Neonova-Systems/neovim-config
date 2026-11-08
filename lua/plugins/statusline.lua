@@ -93,8 +93,8 @@ return {
             -- Paths and Flags
             local filename = vim.fn.expand("%:.")
             if filename == "" then filename = "[No Name]" end
-            local modified = vim.bo.modified and " [+]" or ""
-            local readonly = ((not vim.bo.modifiable) or vim.bo.readonly) and " [RO]" or ""
+            local modified = vim.bo.modified and "  " or "  "
+            local readonly = ((not vim.bo.modifiable) or vim.bo.readonly) and "" or ""
 
             -- Components
             local lsp = get_lsp_status()
