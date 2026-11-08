@@ -14,28 +14,25 @@ return {
                 border = "single",
                 winblend = 0,
             },
-            keys = {
-                groups = {
-                    ["<leader>f"] = { name = "+find" },
-                    ["<leader>g"] = { name = "+git" },
-                    ["<leader>l"] = { name = "+lsp" },
-                    ["<leader>b"] = { name = "+buffers" },
-                    ["<leader>c"] = { name = "+colorscheme" },
-                    ["<leader>d"] = { name = "+delete" },
-                    ["<leader>e"] = { name = "+explorer" },
-                    ["<leader>s"] = { name = "+search" },
-                    ["<leader>x"] = { name = "+execute" },
-                    ["g"] = { name = "+goto" },
-                    ["<C-h>"] = { name = "+harpoon" },
-                },
+            spec = {
+                -- Glance peek mappings (g-prefix group)
+                { "gpd", "<cmd>Glance definitions<CR>", desc = "Glance: Peek Definitions" },
+                { "gpr", "<cmd>Glance references<CR>", desc = "Glance: Peek References" },
+                { "gpi", "<cmd>Glance implementations<CR>", desc = "Glance: Peek Implementations" },
+                { "gpy", "<cmd>Glance type_definitions<CR>", desc = "Glance: Peek Type Definitions" },
+
+                { "<leader>f", group = "find" },
+                { "<leader>g", group = "git" },
+                { "<leader>l", group = "lsp" },
+                { "<leader>b", group = "buffers" },
+                { "<leader>c", group = "colorscheme" },
+                { "<leader>d", group = "delete" },
+                { "<leader>e", group = "explorer" },
+                { "<leader>s", group = "search" },
+                { "<leader>x", group = "execute" },
+                { "g",     group = "goto" },
+                { "<C-h>", group = "harpoon" },
             },
         })
     end,
-    keys = {
-        -- Glance peek mappings (g-prefix group)
-        { "gpd", "<cmd>Glance definitions<CR>", desc = "Glance: Peek Definitions" },
-        { "gpr", "<cmd>Glance references<CR>", desc = "Glance: Peek References" },
-        { "gpi", "<cmd>Glance implementations<CR>", desc = "Glance: Peek Implementations" },
-        { "gpy", "<cmd>Glance type_definitions<CR>", desc = "Glance: Peek Type Definitions" },
-    },
 }
