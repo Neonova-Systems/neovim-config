@@ -17,14 +17,13 @@ return {
 
         -- LSP
         { "<leader>fr", function() require("telescope.builtin").lsp_references() end, desc = "LSP References" },
-        { "<leader>fd", function() require("telescope.builtin").diagnostics() end, desc = "Diagnostics" },
         { "<leader>fk", function() require("telescope.builtin").keymaps() end, desc = "Keymaps" },
 
         -- Git
         { "<leader>ft", function() require("telescope.builtin").git_files() end, desc = "Git Files" },
         { "<leader>gs", function() require("telescope.builtin").git_status() end, desc = "Git Status" },
         { "<leader>gb", function() require("telescope.builtin").git_branches() end, desc = "Git Branches" },
-        { "<leader>gc", function() require("telescope.builtin").git_commits() end, desc = "Git Commits" },
+        { "<leader>gC", function() require("telescope.builtin").git_commits() end, desc = "Git Commits" },
 
         -- Misc
         { "<leader>fc", function() require("telescope.builtin").colorschemes() end, desc = "Colorschemes" },
