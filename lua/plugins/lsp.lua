@@ -24,6 +24,14 @@ return {
                         "csh",
                     }
                 },
+                pyright = {},
+                rust_analyzer = {
+                    ["rust-analyzer"] = {
+                        cargo = { allTargets = false },
+                        procMacro = { enable = true },
+                    },
+                },
+                clangd = {},
                 ts_ls = {
                     init_options = {
                         preferences = {
