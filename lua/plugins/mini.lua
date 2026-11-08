@@ -53,11 +53,11 @@ return {
         -- after a few seconds, which makes them impossible to read while debugging.
         -- duration <= 0 is treated by mini.notify as "never show", so a large
         -- finite value is used to approximate persistent.
-        vim.notify = MiniNotify.make_notify({
-            ERROR = { duration = 60000, hl_group = "DiagnosticError" },
-            WARN  = { duration = 60000, hl_group = "DiagnosticWarn" },
-            INFO  = { duration = 5000, hl_group = "DiagnosticInfo" },
-        })
+        -- vim.notify = MiniNotify.make_notify({
+        --     ERROR = { duration = 60000, hl_group = "DiagnosticError" },
+        --     WARN  = { duration = 60000, hl_group = "DiagnosticWarn" },
+        --     INFO  = { duration = 5000, hl_group = "DiagnosticInfo" },
+        -- })
 
         require("mini.extra").setup()
         require("mini.cursorword").setup()

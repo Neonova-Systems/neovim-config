@@ -123,7 +123,7 @@ return {
     {
         "lewis6991/hover.nvim",
         config = function()
-            require("hover").setup({
+            require("hover").config({
                 providers = {
                     'hover.providers.diagnostic',
                     'hover.providers.lsp',
@@ -144,10 +144,6 @@ return {
                 { desc = 'hover.nvim (previous source)' })
             vim.keymap.set('n', '<C-n>', function() require('hover').switch('next') end,
                 { desc = 'hover.nvim (next source)' })
-
-            -- Mouse support
-            vim.o.mousemoveevent = true
-            vim.keymap.set('n', '<MouseMove>', function() require('hover').mouse() end, { desc = 'hover.nvim (mouse)' })
         end,
     }
 }
