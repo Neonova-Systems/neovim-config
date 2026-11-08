@@ -84,20 +84,20 @@ return {
             vim.keymap.set('n', 'grt', "<cmd>Glance type_definitions<CR>", { desc = "Glance: Peek Type Definitions" })
 
             -- Direct-jump fallbacks (the old nvim-lsp behavior, one extra key)
-            vim.keymap.set('n', 'g<Space>d', vim.lsp.buf.definition, { desc = "LSP: Jump to Definition" })
-            vim.keymap.set('n', 'g<Space>D', vim.lsp.buf.declaration, { desc = "LSP: Jump to Declaration" })
-            vim.keymap.set('n', 'g<Space>i', vim.lsp.buf.implementation, { desc = "LSP: Jump to Implementation" })
-            vim.keymap.set('n', 'g<Space>t', vim.lsp.buf.type_definition, { desc = "LSP: Jump to Type Definition" })
-            vim.keymap.set('n', 'g<Space>r', function()
-                local lsp_params = { context = { includeDeclaration = true } }
-                local local_options = {
-                    on_list = function(options)
-                        vim.fn.setqflist({}, ' ', options)
-                        vim.cmd('copen')
-                    end
-                }
-                vim.lsp.buf.references(lsp_params, local_options)
-            end, { desc = "LSP: Jump to References (quickfix)" })
+            -- vim.keymap.set('n', 'g<Space>d', vim.lsp.buf.definition, { desc = "LSP: Jump to Definition" })
+            -- vim.keymap.set('n', 'g<Space>D', vim.lsp.buf.declaration, { desc = "LSP: Jump to Declaration" })
+            -- vim.keymap.set('n', 'g<Space>i', vim.lsp.buf.implementation, { desc = "LSP: Jump to Implementation" })
+            -- vim.keymap.set('n', 'g<Space>t', vim.lsp.buf.type_definition, { desc = "LSP: Jump to Type Definition" })
+            -- vim.keymap.set('n', 'g<Space>r', function()
+            --     local lsp_params = { context = { includeDeclaration = true } }
+            --     local local_options = {
+            --         on_list = function(options)
+            --             vim.fn.setqflist({}, ' ', options)
+            --             vim.cmd('copen')
+            --         end
+            --     }
+            --     vim.lsp.buf.references(lsp_params, local_options)
+            -- end, { desc = "LSP: Jump to References (quickfix)" })
 
             vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { desc = "LSP Code Action" })
             vim.keymap.set('n', 'grx', vim.lsp.codelens.run, { desc = "LSP: Run CodeLens Command" })

@@ -117,31 +117,32 @@ return {
                 name = "Goto",
                 hl = "ExBlue",
                 items = {
-                    {
-                        name = "Jump to Definition",
-                        cmd = vim.lsp.buf.definition,
-                        rtxt = "g<Space>d",
-                    },
-                    {
-                        name = "Jump to Declaration",
-                        cmd = vim.lsp.buf.declaration,
-                        rtxt = "g<Space>D",
-                    },
-                    {
-                        name = "Jump to Implementation",
-                        cmd = vim.lsp.buf.implementation,
-                        rtxt = "g<Space>i",
-                    },
-                    {
-                        name = "Jump to Type Definition",
-                        cmd = vim.lsp.buf.type_definition,
-                        rtxt = "g<Space>t",
-                    },
-                    {
-                        name = "Jump to References (quickfix)",
-                        cmd = deferred(function() require("config.actions").lsp_references_qf() end),
-                        rtxt = "g<Space>r",
-                    },
+                    -- Replaced by Glance peek-first binds (gd, gD, grr, gri, grt):
+                    -- {
+                    --     name = "Jump to Definition",
+                    --     cmd = vim.lsp.buf.definition,
+                    --     rtxt = "g<Space>d",
+                    -- },
+                    -- {
+                    --     name = "Jump to Declaration",
+                    --     cmd = vim.lsp.buf.declaration,
+                    --     rtxt = "g<Space>D",
+                    -- },
+                    -- {
+                    --     name = "Jump to Implementation",
+                    --     cmd = vim.lsp.buf.implementation,
+                    --     rtxt = "g<Space>i",
+                    -- },
+                    -- {
+                    --     name = "Jump to Type Definition",
+                    --     cmd = vim.lsp.buf.type_definition,
+                    --     rtxt = "g<Space>t",
+                    -- },
+                    -- {
+                    --     name = "Jump to References (quickfix)",
+                    --     cmd = deferred(function() require("config.actions").lsp_references_qf() end),
+                    --     rtxt = "g<Space>r",
+                    -- },
                 },
             },
             {
