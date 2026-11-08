@@ -4,9 +4,12 @@ return {
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
+            "folke/trouble.nvim",
         },
         lazy = false,
         config = function()
+            require("trouble").setup({})
+
             local servers = {
                 lua_ls = {
                     settings = {
@@ -107,6 +110,13 @@ return {
             vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format Local buffer" })
             vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol,
                 { desc = "Lists all symbols in the current workspace in the quickfix window." })
+
+            -- Open Trouble when an LSP attaches (shows diagnostics, references, etc.)
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(ev)
+                    vim.cmd("Trouble open")
+                end,
+            })
         end,
     },
     {
