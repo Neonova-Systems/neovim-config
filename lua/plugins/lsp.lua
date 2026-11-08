@@ -117,21 +117,9 @@ return {
             vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol,
                 { desc = "Lists all symbols in the current workspace in the quickfix window." })
 
-            -- Trouble LSP navigation — opens in a right sidebar panel
-            vim.keymap.set('n', '<leader>ltd', function() require("trouble").open({ mode = "lsp_definitions", position = "right" }) end,
-                { desc = "Trouble: LSP Definitions (right)" })
-            vim.keymap.set('n', '<leader>ltr', function() require("trouble").open({ mode = "lsp_references", position = "right" }) end,
-                { desc = "Trouble: LSP References (right)" })
-            vim.keymap.set('n', '<leader>lti', function() require("trouble").open({ mode = "lsp_implementations", position = "right" }) end,
-                { desc = "Trouble: LSP Implementations (right)" })
-            vim.keymap.set('n', '<leader>ltt', function() require("trouble").open({ mode = "lsp_type_definitions", position = "right" }) end,
-                { desc = "Trouble: LSP Type Definitions (right)" })
-            vim.keymap.set('n', '<leader>ltD', function() require("trouble").open({ mode = "lsp_declarations", position = "right" }) end,
-                { desc = "Trouble: LSP Declarations (right)" })
-            vim.keymap.set('n', '<leader>lts', function() require("trouble").open({ mode = "lsp_document_symbols", position = "right" }) end,
-                { desc = "Trouble: LSP Document Symbols (right)" })
-
-            -- Open Trouble when an LSP attaches (shows diagnostics, references, etc.)
+            -- Open Trouble when an LSP attaches — shows definitions, references,
+            -- implementations, type definitions, declarations, and document symbols
+            -- in a right sidebar panel.
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(ev)
                     -- Workaround: trouble.nvim's treesitter decoration provider
@@ -142,7 +130,9 @@ return {
                     if not ts._on_line then ts._on_line = function() end end
 
                     local ok, trouble = pcall(require, "trouble")
-                    if ok then trouble.open({ mode = "diagnostics" }) end
+                    if ok then
+                        trouble.open({ mode = "lsp", position = "right" })
+                    end
                 end,
             })
         end,
