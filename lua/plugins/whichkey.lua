@@ -15,11 +15,10 @@ return {
                 winblend = 0,
             },
             spec = {
-                -- Glance peek mappings (g-prefix group)
-                { "gpd", "<cmd>Glance definitions<CR>", desc = "Glance: Peek Definitions" },
-                { "gpr", "<cmd>Glance references<CR>", desc = "Glance: Peek References" },
-                { "gpi", "<cmd>Glance implementations<CR>", desc = "Glance: Peek Implementations" },
-                { "gpy", "<cmd>Glance type_definitions<CR>", desc = "Glance: Peek Type Definitions" },
+                -- The gd/grr/gri/grt and g<Space>* mappings are defined in lsp.lua;
+                -- which-key picks them up from the keymaps automatically.
+                { "g",     group = "goto" },
+                { "g<Space>", group = "jump (direct)" },
 
                 { "<leader>f", group = "find" },
                 { "<leader>g", group = "git" },

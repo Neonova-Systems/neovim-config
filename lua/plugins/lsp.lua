@@ -75,10 +75,20 @@ return {
             capabilities = vim.tbl_deep_extend("force", capabilities, require("mini.completion").get_lsp_capabilities())
             vim.lsp.config("*", { capabilities = capabilities, })
 
-            -- default
-            vim.keymap.set('n', 'gri', vim.lsp.buf.implementation, { desc = "Go to Implementation" })   -- Go to Implementation
-            vim.keymap.set('n', 'grt', vim.lsp.buf.type_definition, { desc = "Go to Type Definition" }) -- Go to Type Definition
-            vim.keymap.set('n', 'grr', function()
+            -- Glance peek-first goto workflow: gd/grr/gri/grt open side panels;
+            -- g<Space>d / g<Space>r jump directly (the old behavior).
+            vim.keymap.set('n', 'gd', "<cmd>Glance definitions<CR>", { desc = "Glance: Peek Definitions" })
+            vim.keymap.set('n', 'gD', "<cmd>Glance declarations<CR>", { desc = "Glance: Peek Declarations" })
+            vim.keymap.set('n', 'grr', "<cmd>Glance references<CR>", { desc = "Glance: Peek References" })
+            vim.keymap.set('n', 'gri', "<cmd>Glance implementations<CR>", { desc = "Glance: Peek Implementations" })
+            vim.keymap.set('n', 'grt', "<cmd>Glance type_definitions<CR>", { desc = "Glance: Peek Type Definitions" })
+
+            -- Direct-jump fallbacks (the old nvim-lsp behavior, one extra key)
+            vim.keymap.set('n', 'g<Space>d', vim.lsp.buf.definition, { desc = "LSP: Jump to Definition" })
+            vim.keymap.set('n', 'g<Space>D', vim.lsp.buf.declaration, { desc = "LSP: Jump to Declaration" })
+            vim.keymap.set('n', 'g<Space>i', vim.lsp.buf.implementation, { desc = "LSP: Jump to Implementation" })
+            vim.keymap.set('n', 'g<Space>t', vim.lsp.buf.type_definition, { desc = "LSP: Jump to Type Definition" })
+            vim.keymap.set('n', 'g<Space>r', function()
                 local lsp_params = { context = { includeDeclaration = true } }
                 local local_options = {
                     on_list = function(options)
@@ -87,15 +97,13 @@ return {
                     end
                 }
                 vim.lsp.buf.references(lsp_params, local_options)
-            end, { desc = "LSP: References to Quickfix List" })
+            end, { desc = "LSP: Jump to References (quickfix)" })
+
             vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { desc = "LSP Code Action" })
             vim.keymap.set('n', 'grx', vim.lsp.codelens.run, { desc = "LSP: Run CodeLens Command" })
             vim.keymap.set('n', 'gO', vim.lsp.buf.document_symbol, { desc = "LSP: List Document Symbols" })
             vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help, { desc = "LSP: Show Signature Help" })
             vim.keymap.set('n', 'gsh', vim.lsp.buf.signature_help, { desc = "LSP: Show Signature Help" })
-
-            vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Go to definition" })
-            vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
             vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format Local buffer" })
             vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol,
                 { desc = "Lists all symbols in the current workspace in the quickfix window." })
