@@ -156,7 +156,9 @@ return {
 
         vim.api.nvim_set_hl(0, "MiniPickMatchCurrent", { fg = "#000000", bg = "#325CC0", bold = true })
 
-        vim.keymap.set("n", "<leader>fd", function() require("mini.extra").pickers.diagnostic() end,
-            { desc = "Search diagnostics" })
+        vim.keymap.set("n", "<leader>fd", function() require("mini.extra").pickers.diagnostic({ scope = "current" }) end,
+            { desc = "Search diagnostics (current buffer)" })
+        vim.keymap.set("n", "<leader>fD", function() require("mini.extra").pickers.diagnostic({ scope = "all" }) end,
+            { desc = "Search diagnostics (workspace)" })
     end,
 }

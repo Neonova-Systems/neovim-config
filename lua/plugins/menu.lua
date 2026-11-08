@@ -397,6 +397,7 @@ return {
                     {
                         name = "Workspace Diagnostics",
                         cmd = picker_diagnostic("all"),
+                        rtxt = "<leader>fD",
                     },
                 },
             },
