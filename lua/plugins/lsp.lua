@@ -131,7 +131,7 @@ return {
 
                     local ok, trouble = pcall(require, "trouble")
                     if ok then
-                        trouble.open({ mode = "lsp", win = { position = "right" } })
+                        trouble.open({ mode = "lsp", win = { type = "split", position = "right" } })
                     end
                 end,
             })
