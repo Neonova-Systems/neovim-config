@@ -3,7 +3,7 @@ return {
     cmd = "Spectre",
     keys = {
         { "<leader>sr", "<cmd>Spectre<CR>", desc = "Search & Replace across files" },
-        { "<leader>sw", function() require("spectre").open_visual_search({ is_open = true }) end, desc = "Search word under cursor" },
+        { "<leader>sw", function() require("spectre").open_visual() end, desc = "Spectre: search word under cursor" },
     },
     config = function()
         require("spectre").setup({
