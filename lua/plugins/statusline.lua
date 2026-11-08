@@ -71,7 +71,7 @@ return {
         local function get_indent_status()
             local indent = vim.bo.expandtab and ("  " .. vim.bo.shiftwidth .. "sp")
                 or ("  " .. vim.bo.tabstop .. "t")
-            local spell = vim.bo.spell and "  Spell" or ""
+            local spell = vim.wo.spell and "  Spell" or ""
             return indent .. spell
         end
 
