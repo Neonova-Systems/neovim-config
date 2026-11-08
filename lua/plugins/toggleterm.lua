@@ -32,7 +32,7 @@ return {
         })
     end,
     keys = {
-        { "<leader>gt", "<cmd>ToggleTerm<CR>", desc = "Toggle floating terminal" },
         { "<leader>gl", "<cmd>lua require('config.actions').lazygit()<CR>", desc = "Open lazygit in floating terminal" },
     },
 }
+
