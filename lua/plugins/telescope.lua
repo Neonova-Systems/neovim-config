@@ -53,7 +53,7 @@ return {
                     horizontal = { anchor = "center", height = 0.95, mirror = false, prompt_position = "top", width = 0.95, preview_cutoff = 120, preview_width = 100 },
                     vertical = { anchor = "center", height = 0.95, mirror = false, prompt_position = "bottom", width = 0.85, preview_cutoff = 40, preview_height = 30 },
                 },
-                cycle_layout_list = { "horizontal", "vertical", "cursor", "bottom_pane"},
+                cycle_layout_list = { "horizontal", "vertical", "cursor", "bottom_pane" },
                 winblend = 0,
                 wrap_results = false,
                 prompt_prefix = '󰛡 ',
@@ -64,9 +64,9 @@ return {
                 border = true,
                 path_display = { "truncate" },
                 borderchars = {
-                    prompt = {'▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' },
-                    results = {' ', '▐', '▄', '▌', '▌', '▐', '▟', '▙' },
-                    preview = {'▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' },
+                    prompt = { '▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' },
+                    results = { ' ', '▐', '▄', '▌', '▌', '▐', '▟', '▙' },
+                    preview = { '▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' },
                 },
                 hl_result_eol = true,
                 dynamic_preview_title = true,
@@ -127,16 +127,16 @@ return {
         require("telescope").load_extension("ui-select")
         require("telescope").load_extension("undo")
 
-        vim.keymap.set('n', '<leader>fb', require("telescope.builtin").buffers,
+        vim.keymap.set('n', '<leader>fb', function() require("telescope.builtin").buffers() end,
             { noremap = true, silent = true, desc = 'Lists open buffers in current neovim' })
-        vim.keymap.set('n', '<leader>fh', require("telescope.builtin").oldfiles,
+        vim.keymap.set('n', '<leader>fh', function() require("telescope.builtin").oldfiles() end,
             { noremap = true, silent = true, desc = 'Find last opened file' })
-        vim.keymap.set('n', '<leader>fw', require("telescope.builtin").live_grep,
+        vim.keymap.set('n', '<leader>fw', function() require("telescope.builtin").live_grep() end,
             { noremap = true, silent = true, desc = 'Find word' })
-        vim.keymap.set('n', '<leader>ff', require("telescope.builtin").find_files,
+        vim.keymap.set('n', '<leader>ff', function() require("telescope.builtin").find_files() end,
             { noremap = true, silent = true, desc = 'Find files' })
         vim.keymap.set('n', '<leader>fa', ':Telescope<CR>', { noremap = true, silent = true, desc = 'Open Telescope' })
-        vim.keymap.set('n', '<leader>fu', require("telescope").extensions.undo.undo,
+        vim.keymap.set('n', '<leader>fu', function() require("telescope").extensions.undo.undo() end,
             { noremap = true, silent = true, desc = 'Open Undotree' })
     end,
 }
