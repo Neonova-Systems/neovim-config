@@ -1,7 +1,6 @@
 return {
-    spec = {
-        { -- Main LSP configuration
-            "neovim/nvim-lspconfig",
+    { -- Main LSP configuration
+        "neovim/nvim-lspconfig",
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
@@ -153,5 +152,5 @@ return {
               title = true,
             })
         end,
-    },
+    }
 }
