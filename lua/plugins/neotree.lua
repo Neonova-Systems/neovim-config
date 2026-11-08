@@ -53,7 +53,6 @@ return {
                         -- mini.files defaults
                         ["h"]     = "navigate_up",
                         ["l"]     = "toggle_node",
-                        ["H"]     = "go_out_plus",
                         ["<CR>"]  = "open",
                         ["s"]     = "open_vsplit",
                         ["v"]     = "open_split",
