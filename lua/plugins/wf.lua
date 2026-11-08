@@ -4,7 +4,6 @@ return {
     lazy = false,
     keys = {
         { "<Leader>", function() require("wf.builtin.which_key")({ text_insert_in_advance = "<Leader>" })() end, desc = "[wf.nvim] which-key" },
-        { "g",        function() require("wf.builtin.which_key")({ text_insert_in_advance = "g" })() end,        desc = "[wf.nvim] which-key 'g' group" },
     },
     config = function()
         require("wf").setup({})
