@@ -10,6 +10,12 @@ return {
         config = function()
             require("trouble").setup({})
 
+            -- Patch trouble's treesitter decoration provider: this Neovim
+            -- version's vim.treesitter.highlighter lacks _on_win/_on_line,
+            -- which causes "attempt to call a nil value" on every redraw.
+            local tt = require("trouble.view.treesitter")
+            tt.setup = function() end -- no-op: skip decoration provider registration
+
             local servers = {
                 lua_ls = {
                     settings = {
@@ -114,6 +120,13 @@ return {
             -- Open Trouble when an LSP attaches (shows diagnostics, references, etc.)
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(ev)
+                    -- Workaround: trouble.nvim's treesitter decoration provider
+                    -- calls vim.treesitter.highlighter._on_win/_on_line which
+                    -- don't exist in this Neovim version. Stub them to no-ops.
+                    local ts = vim.treesitter.highlighter
+                    if not ts._on_win then ts._on_win = function() end end
+                    if not ts._on_line then ts._on_line = function() end end
+
                     local ok, trouble = pcall(require, "trouble")
                     if ok then trouble.open({ mode = "diagnostics" }) end
                 end,
