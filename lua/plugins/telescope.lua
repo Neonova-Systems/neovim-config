@@ -27,17 +27,20 @@ return {
         function telescope_custom_actions.multi_selection_open_vsplit(prompt_bufnr)
             telescope_custom_actions._multiopen(prompt_bufnr, "vsplit")
         end
+
         function telescope_custom_actions.multi_selection_open_split(prompt_bufnr)
             telescope_custom_actions._multiopen(prompt_bufnr, "split")
         end
+
         function telescope_custom_actions.multi_selection_open_tab(prompt_bufnr)
             telescope_custom_actions._multiopen(prompt_bufnr, "tabe")
         end
+
         function telescope_custom_actions.multi_selection_open(prompt_bufnr)
             telescope_custom_actions._multiopen(prompt_bufnr, "edit")
         end
 
-        require('telescope').setup{
+        require('telescope').setup {
             defaults = {
                 sorting_strategy = 'ascending',
                 selection_strategy = 'reset',
@@ -100,7 +103,8 @@ return {
                             return filepath:match(filetypes_table)
                         end, { ".*%.csv", ".*%.toml", })
                         if not vim.tbl_isempty(excluded_filetypes) then
-                            previewer_utils.set_preview_message(bufnr, opts.winid, string.format("I don't like %s files! :P", excluded_filetypes[1]:sub(5, -1)))
+                            previewer_utils.set_preview_message(bufnr, opts.winid,
+                                string.format("I don't like %s files! :P", excluded_filetypes[1]:sub(5, -1)))
                             return false
                         end
                         return true
@@ -123,33 +127,16 @@ return {
         require("telescope").load_extension("ui-select")
         require("telescope").load_extension("undo")
 
-        vim.api.nvim_set_hl(0, 'TelescopeNormal', {link = 'NormalFloat'})
-        vim.api.nvim_set_hl(0, 'TelescopeMatching', {fg = "#ff8f40", underline = true})
-        vim.api.nvim_set_hl(0, 'TelescopeSelection', {fg = '#242b3d', bg = '#0b0e13', italic = true, nocombine = true})
-        vim.api.nvim_set_hl(0, 'TelescopeMultiSelection', {fg = '#2a3247'})
-        vim.api.nvim_set_hl(0, 'TelescopeMultiIcon', {fg = '#36a3d9', bg = '#030d11', nocombine = true})
-
-        vim.api.nvim_set_hl(0, 'TelescopePromptNormal', {fg = '#b3b1ad', bg = '#08090d'})
-        vim.api.nvim_set_hl(0, 'TelescopePromptBorder', {fg = '#040507', bg = '#08090d', blend = 0})
-        vim.api.nvim_set_hl(0, 'TelescopePromptTitle', {fg = '#36a3d9', bg = '#030d11', blend = 0, italic = true})
-        vim.api.nvim_set_hl(0, 'TelescopePromptCounter', {fg = '#36a3d9', italic = true})
-        vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', {fg = '#36a3d9'})
-
-        vim.api.nvim_set_hl(0, 'TelescopePreviewNormal', {fg = '#b3b1ad', bg = '#06070a'})
-        vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', {fg = '#040507', bg = '#06070a', blend = 0})
-        vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', {fg = '#36a3d9', bg = '#030d11', blend = 0, italic = true})
-        vim.api.nvim_set_hl(0, 'TelescopePreviewMessage', {fg = '#36a3d9', bg = '#030d11'})
-        vim.api.nvim_set_hl(0, 'TelescopePreviewMessageFillchar', {fg = '#36a3d9'})
-
-        vim.api.nvim_set_hl(0, 'TelescopeResultsNormal', {fg = '#1b202d', bg = '#08090d'})
-        vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', {fg = '#040507', bg = '#08090d', blend = 0})
-        vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', {fg = '#36a3d9', bg = '#030d11', blend = 0, italic = true})
-
-        vim.keymap.set('n', '<leader>fb', require("telescope.builtin").buffers, {noremap = true, silent = true, desc = 'Lists open buffers in current neovim'})
-        vim.keymap.set('n', '<leader>fh', require("telescope.builtin").oldfiles, {noremap = true, silent = true, desc = 'Find last opened file'})
-        vim.keymap.set('n', '<leader>fw', require("telescope.builtin").live_grep, {noremap = true, silent = true, desc = 'Find word'})
-        vim.keymap.set('n', '<leader>ff', require("telescope.builtin").find_files, {noremap = true, silent = true, desc = 'Find files'})
-        vim.keymap.set('n', '<leader>fa', ':Telescope<CR>', {noremap = true, silent = true, desc = 'Open Telescope'})
-        vim.keymap.set('n', '<leader>fu', require("telescope").extensions.undo.undo, {noremap = true, silent = true, desc = 'Open Undotree'})
+        vim.keymap.set('n', '<leader>fb', require("telescope.builtin").buffers,
+            { noremap = true, silent = true, desc = 'Lists open buffers in current neovim' })
+        vim.keymap.set('n', '<leader>fh', require("telescope.builtin").oldfiles,
+            { noremap = true, silent = true, desc = 'Find last opened file' })
+        vim.keymap.set('n', '<leader>fw', require("telescope.builtin").live_grep,
+            { noremap = true, silent = true, desc = 'Find word' })
+        vim.keymap.set('n', '<leader>ff', require("telescope.builtin").find_files,
+            { noremap = true, silent = true, desc = 'Find files' })
+        vim.keymap.set('n', '<leader>fa', ':Telescope<CR>', { noremap = true, silent = true, desc = 'Open Telescope' })
+        vim.keymap.set('n', '<leader>fu', require("telescope").extensions.undo.undo,
+            { noremap = true, silent = true, desc = 'Open Undotree' })
     end,
 }

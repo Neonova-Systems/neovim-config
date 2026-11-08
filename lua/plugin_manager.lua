@@ -19,6 +19,103 @@ local config = {
         cond = nil, ---@type boolean|fun(self:LazyPlugin):boolean|nil
         version = "*", -- enable this to try installing the latest stable versions of plugins
     },
+    debug = true,
+    install = {
+        missing = true, -- install missing plugins on startup. This doesn't increase startup time.
+        colorscheme = { "habamax" }, -- try to load one of these colorschemes when starting an installation during startup
+    },
+    performance = {
+        cache = { enabled = true, },
+        reset_packpath = true, -- reset the package path to improve startup time
+        rtp = {
+            reset = true,   -- reset the runtime path to $VIMRUNTIME and your config directory
+            paths = { "/home/xaxeric/Workspace/neovim-config-worktree" },     -- add any custom paths here that you want to includes in the rtp -@type string[]
+            disabled_plugins = { ---@type string[] list any plugins you want to disable here
+                "gzip",
+                "zip",
+                "zipPlugin",
+                "tar",
+                "tarPlugin",
+                "getscript",
+                "getscriptPlugin",
+                "vimball",
+                "vimballPlugin",
+                "2html_plugin",
+                "logipat",
+                "rrhelper",
+                "matchit"
+                }
+            },
+        },
+        ui = {
+            size = { width = 0.8, height = 0.8 }, -- a number <1 is a percentage., >1 is a fixed size
+            wrap = false, -- wrap the lines in the ui
+            border = "none", -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
+            icons = {
+                cmd = " ",
+                config = "",
+                event = "",
+                ft = " ",
+                init = " ",
+                import = " ",
+                keys = " ",
+                lazy = "󰒲 ",
+                loaded = "●",
+                not_loaded = "○",
+                plugin = " ",
+                runtime = " ",
+                source = " ",
+                start = "",
+                task = "✔ ",
+            },
+            browser = nil, ---@type string? leave nil, to automatically select a browser depending on your OS. If you want to use a specific browser, you can define it here
+            throttle = 20, -- how frequently should the ui process render events
+            custom_keys = { -- you can define custom key maps here. To disable one of the defaults, set it to false
+                ["<localleader>l"] = function(plugin) -- open lazygit log
+                    require("lazy.util").float_term({ "lazygit", "log" }, {
+                        cwd = plugin.dir,
+                    })
+                end,
+                ["<localleader>t"] = function(plugin) -- open a terminal for the plugin dir
+                    require("lazy.util").float_term(nil, {
+                        cwd = plugin.dir,
+                    })
+                end,
+            },
+        },
+        checker = {
+            enabled = true,     -- automatically check for plugin updates
+            concurrency = nil,  ---@type number? set to 1 to check for updates very slowly
+            notify = true,      -- get a notification when new updates are found
+            frequency = 3600,   -- check for updates every hour
+        },
+        change_detection = {
+            enabled = true,     -- automatically check for config file changes and reload the ui
+            notify = true,      -- get a notification when changes are found
+        },
+        performance = {
+            cache = { enabled = true, },
+            reset_packpath = true, -- reset the package path to improve startup time
+            rtp = {
+                reset = true,   -- reset the runtime path to $VIMRUNTIME and your config directory
+                paths = { "/home/xaxeric/Workspace/neovim-config-worktree" },     -- add any custom paths here that you want to includes in the rtp -@type string[]
+                disabled_plugins = { ---@type string[] list any plugins you want to disable here
+                    "gzip",
+                    "zip",
+                    "zipPlugin",
+                    "tar",
+                    "tarPlugin",
+                    "getscript",
+                    "getscriptPlugin",
+                    "vimball",
+                    "vimballPlugin",
+                    "2html_plugin",
+                    "logipat",
+                    "rrhelper",
+                    "matchit"
+                    }
+                },
+            },
     spec = nil, ---@type LazySpec leave nil when passing the spec as the first argument to setup()
     lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile generated after running update.
     concurrency = nil, ---@type number limit the maximum amount of concurrent tasks
