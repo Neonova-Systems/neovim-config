@@ -122,6 +122,12 @@ return {
     },
     {
         "lewis6991/hover.nvim",
+        keys = {
+            { "K", function() require('hover').open() end, desc = 'hover.nvim (open)' },
+            { "gK", function() require('hover').enter() end, desc = 'hover.nvim (enter)' },
+            { "<C-p>", function() require('hover').switch('previous') end, desc = 'hover.nvim (previous source)' },
+            { "<C-n>", function() require('hover').switch('next') end, desc = 'hover.nvim (next source)' },
+        },
         config = function()
             require("hover").config({
                 providers = {
@@ -137,13 +143,14 @@ return {
                     'hover.providers.fold_preview',
                     'hover.providers.highlight',
                 },
+              preview_opts = {
+                border = 'single'
+              },
+              -- Whether the contents of a currently open hover window should be moved
+              -- to a :h preview-window when pressing the hover keymap.
+              preview_window = false,
+              title = true,
             })
-            vim.keymap.set('n', 'K', function() require('hover').open() end, { desc = 'hover.nvim (open)' })
-            vim.keymap.set('n', 'gK', function() require('hover').enter() end, { desc = 'hover.nvim (enter)' })
-            vim.keymap.set('n', '<C-p>', function() require('hover').switch('previous') end,
-                { desc = 'hover.nvim (previous source)' })
-            vim.keymap.set('n', '<C-n>', function() require('hover').switch('next') end,
-                { desc = 'hover.nvim (next source)' })
         end,
     }
 }
