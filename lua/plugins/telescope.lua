@@ -14,6 +14,21 @@ return {
         { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find files" },
         { "<leader>fa", ":Telescope<CR>", desc = "Open Telescope" },
         { "<leader>fu", function() require("telescope").extensions.undo.undo() end, desc = "Open Undotree" },
+
+        -- LSP
+        { "<leader>fr", function() require("telescope.builtin").lsp_references() end, desc = "LSP References" },
+        { "<leader>fd", function() require("telescope.builtin").diagnostics() end, desc = "Diagnostics" },
+        { "<leader>fk", function() require("telescope.builtin").keymaps() end, desc = "Keymaps" },
+
+        -- Git
+        { "<leader>ft", function() require("telescope.builtin").git_files() end, desc = "Git Files" },
+        { "<leader>gs", function() require("telescope.builtin").git_status() end, desc = "Git Status" },
+        { "<leader>gb", function() require("telescope.builtin").git_branches() end, desc = "Git Branches" },
+        { "<leader>gc", function() require("telescope.builtin").git_commits() end, desc = "Git Commits" },
+
+        -- Misc
+        { "<leader>fc", function() require("telescope.builtin").colorschemes() end, desc = "Colorschemes" },
+        { "<leader>fm", function() require("telescope.builtin").man_pages() end, desc = "Man Pages" },
     },
     config = function()
         local actions = require("telescope.actions")
