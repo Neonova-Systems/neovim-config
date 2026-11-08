@@ -17,6 +17,7 @@ return {
 
         -- LSP
         { "<leader>fr", function() require("telescope.builtin").lsp_references() end, desc = "LSP References" },
+        { "<leader>fd", function() require("telescope.builtin").diagnostics() end, desc = "Diagnostics" },
         { "<leader>fk", function() require("telescope.builtin").keymaps() end, desc = "Keymaps" },
 
         -- Git
