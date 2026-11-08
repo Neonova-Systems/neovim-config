@@ -9,7 +9,7 @@ return {
     keys = {
         { "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Lists open buffers in current neovim" },
         { "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Grep Live" },
-        { "<leader>fh", function() require("telescope.builtin").oldfiles() end, desc = "Find last opened file" },
+        { "<leader>fh", function() require("telescope.builtin").help_tags() end, desc = "Help Tags" },
         { "<leader>fw", function() require("telescope.builtin").live_grep() end, desc = "Find word" },
         { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find files" },
         { "<leader>fa", ":Telescope<CR>", desc = "Open Telescope" },
