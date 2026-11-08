@@ -8,7 +8,9 @@ return {
         },
         lazy = false,
         config = function()
-            require("trouble").setup({})
+            require("trouble").setup({
+    warn_no_results = false, -- don't notify when the auto-opened panel finds nothing
+})
 
             -- Patch trouble's treesitter decoration provider: this Neovim
             -- version's vim.treesitter.highlighter lacks _on_win/_on_line,
