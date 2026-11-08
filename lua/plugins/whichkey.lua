@@ -1,35 +1,15 @@
-return {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    init = function()
-        vim.o.timeout = true
-        vim.o.timeoutlen = 300
-    end,
+    "Cassin01/wf.nvim",
+    version = "*",
     config = function()
-        require("which-key").setup({
-            layout = {
-                align = "center",
-            },
-            win = {
-                border = "single",
-                winblend = 0,
-            },
-            spec = {
-                { "g",     group = "goto" },
-                { "g<Space>", group = "jump (direct)" },
-                { "<leader>-", group = "explorer" },
-
-                { "<leader>f", group = "find" },
-                { "<leader>g", group = "git" },
-                { "<leader>l", group = "lsp" },
-                { "<leader>b", group = "buffers" },
-                { "<leader>c", group = "colorscheme" },
-                { "<leader>d", group = "delete" },
-                { "<leader>e", group = "explorer" },
-                { "<leader>s", group = "search" },
-                { "<leader>x", group = "execute" },
-                { "<C-h>", group = "harpoon" },
-            },
+        require("wf").setup({
+            theme = "default",
         })
+        local which_key = require("wf.builtin.which_key")
+        vim.keymap.set(
+          "n",
+          "<Leader>",
+          which_key({ text_insert_in_advance = "<Leader>" }),
+          { noremap = true, silent = true, desc = "[wf.nvim] which-key", nowait = true }
+        )
     end,
 }

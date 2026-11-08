@@ -15,7 +15,7 @@ function M.grep_word_at_root()
     local word = vim.fn.expand("<cword>")
     if word == "" then return end
     local root = vim.fs.root(0, { ".git", "Makefile", "package.json" }) or vim.fn.getcwd()
-    require("mini.pick").builtin.grep({ pattern = word, source = { cwd = root } })
+    require("telescope.builtin").live_grep({ default_text = word, cwd = root })
 end
 
 --- Spawn lazygit in a floating toggleterm window.

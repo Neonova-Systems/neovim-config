@@ -24,20 +24,16 @@ return {
             if ok then return h end
         end
 
-        local function mini_pick(name)
-            return function() require("mini.pick").builtin[name]() end
+        local function telescope_builtin(name)
+            return function() require("telescope.builtin")[name]() end
         end
 
-        local function mini_extra(name)
-            return function() require("mini.extra").pickers[name]() end
+        local function picker_lsp(builtin)
+            return function() require("telescope.builtin")[builtin]() end
         end
 
-        local function picker_lsp(scope)
-            return function() require("mini.extra").pickers.lsp({ scope = scope }) end
-        end
-
-        local function picker_diagnostic(scope)
-            return function() require("mini.extra").pickers.diagnostic({ scope = scope }) end
+        local function picker_diagnostic()
+            return function() require("telescope.builtin").diagnostics() end
         end
 
         -- Submenu: Harpoon
@@ -286,21 +282,21 @@ return {
                 items = {
                     {
                         name = "Find Files",
-                        cmd = mini_pick("files"),
+                        cmd = telescope_builtin("find_files"),
                         rtxt = "<leader>ff",
                     },
                     {
                         name = "Recent Files",
-                        cmd = mini_extra("oldfiles"),
+                        cmd = telescope_builtin("oldfiles"),
                     },
                     {
                         name = "Buffers",
-                        cmd = mini_pick("buffers"),
+                        cmd = telescope_builtin("buffers"),
                         rtxt = "<leader>fb",
                     },
                     {
                         name = "Help Tags",
-                        cmd = mini_pick("help"),
+                        cmd = telescope_builtin("help_tags"),
                         rtxt = "<leader>fh",
                     },
                 },
@@ -311,7 +307,7 @@ return {
                 items = {
                     {
                         name = "Grep (Live)",
-                        cmd = mini_pick("grep_live"),
+                        cmd = telescope_builtin("live_grep"),
                         rtxt = "<leader>fg",
                     },
                     {
@@ -327,19 +323,29 @@ return {
                 items = {
                     {
                         name = "LSP References",
-                        cmd = picker_lsp("references"),
+                        cmd = telescope_builtin("lsp_references"),
                     },
                     {
                         name = "LSP Definitions",
-                        cmd = picker_lsp("definition"),
+                        cmd = telescope_builtin("lsp_definitions"),
                     },
                     {
                         name = "LSP Implementations",
-                        cmd = picker_lsp("implementation"),
+                        cmd = telescope_builtin("lsp_implementations"),
                     },
                     {
                         name = "LSP Type Defs",
-                        cmd = picker_lsp("type_definition"),
+                        cmd = telescope_builtin("lsp_type_definitions"),
+                    },
+                    {
+                        name = "LSP Document Symbols",
+                        cmd = telescope_builtin("lsp_document_symbols"),
+                        rtxt = "gO",
+                    },
+                    {
+                        name = "LSP Workspace Symbols",
+                        cmd = telescope_builtin("lsp_dynamic_workspace_symbols"),
+                        rtxt = "<leader>vws",
                     },
                 },
             },
@@ -349,20 +355,12 @@ return {
                 items = {
                     {
                         name = "Commands",
-                        cmd = mini_extra("commands"),
+                        cmd = telescope_builtin("commands"),
                     },
                     {
                         name = "Keymaps",
-                        cmd = mini_extra("keymaps"),
+                        cmd = telescope_builtin("keymaps"),
                         rtxt = "<leader>fk",
-                    },
-                    {
-                        name = "Registers",
-                        cmd = mini_extra("registers"),
-                    },
-                    {
-                        name = "Colorschemes",
-                        cmd = mini_extra("colorschemes"),
                     },
                 },
             },
@@ -376,12 +374,12 @@ return {
                 items = {
                     {
                         name = "Document Diagnostics",
-                        cmd = picker_diagnostic("current"),
+                        cmd = picker_diagnostic(),
                         rtxt = "<leader>fd",
                     },
                     {
                         name = "Workspace Diagnostics",
-                        cmd = picker_diagnostic("all"),
+                        cmd = picker_diagnostic(),
                         rtxt = "<leader>fD",
                     },
                 },
