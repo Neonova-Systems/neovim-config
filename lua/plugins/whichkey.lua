@@ -17,7 +17,7 @@ return {
             spec = {
                 { "g",     group = "goto" },
                 { "g<Space>", group = "jump (direct)" },
-                { "-", group = "explorer" },
+                { "<leader>-", group = "explorer" },
 
                 { "<leader>f", group = "find" },
                 { "<leader>g", group = "git" },

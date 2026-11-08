@@ -1,6 +1,14 @@
 return {
     "nvim-mini/mini.nvim",
     dependencies = { "rafamadriz/friendly-snippets" },
+    keys = {
+        { "-", function() require("mini.files").open() end, desc = "Toggle mini file explorer" },
+        { "<leader>-", function()
+            local MiniFiles = require("mini.files")
+            MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+            MiniFiles.reveal_cwd()
+        end, desc = "Reveal current file's directory" },
+    },
     lazy = false,
     config = function()
         require("mini.bufremove").setup()

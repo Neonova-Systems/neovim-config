@@ -10,7 +10,6 @@ return {
     keys = {
         { "<leader>e", "<cmd>Neotree toggle reveal_force_cwd<CR>", desc = "Toggle file explorer" },
         { "<leader>E", "<cmd>Neotree focus<CR>",            desc = "Focus file explorer" },
-        { "-",         "<cmd>Neotree toggle reveal_force_cwd<CR>", desc = "Toggle file explorer" },
         { "<leader>-", "<cmd>Neotree toggle reveal<CR>",           desc = "Reveal current file in explorer" },
     },
     config = function()
