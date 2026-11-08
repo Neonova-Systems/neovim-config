@@ -53,11 +53,8 @@ vim.keymap.set('i', '!', '!<c-g>u', { noremap = true, desc = 'Set undo break-poi
 vim.keymap.set('i', '?', '?<c-g>u', { noremap = true, desc = 'Set undo break-point' })
 vim.keymap.set('i', '#', '#<c-g>u', { noremap = true, desc = 'Set undo break-point' })
 
--- Moving arround panes
-vim.keymap.set('n', '<Up>', '<C-w>k', { noremap = true, silent = true, desc = 'Move to up pane' })
-vim.keymap.set('n', '<Left>', '<C-w>h', { noremap = true, silent = true, desc = 'Move to left pane' })
-vim.keymap.set('n', '<Down>', '<C-w>j', { noremap = true, silent = true, desc = 'Move to down pane' })
-vim.keymap.set('n', '<Right>', '<C-w>l', { noremap = true, silent = true, desc = 'Move to right pane' })
+-- Moving around panes (sh/sj/sk/sl only; arrows are left free so <C-h/j/k/l>
+-- don't get hijacked by terminal arrow-sequence emulation)
 vim.keymap.set('n', 'sh', '<C-w>h', { noremap = true, silent = true, desc = 'Move to left pane' })
 vim.keymap.set('n', 'sj', '<C-w>j', { noremap = true, silent = true, desc = 'Move to down pane' })
 vim.keymap.set('n', 'sk', '<C-w>k', { noremap = true, silent = true, desc = 'Move to up pane' })

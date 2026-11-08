@@ -460,27 +460,27 @@ return {
             },
             { name = "separator" },
             {
-                name = "LSP",
+                name = "󰄭 LSP",
                 hl = "ExBlue",
                 items = lsp_submenu,
             },
             {
-                name = "Git",
+                name = "󰊢 Git",
                 hl = "ExBlue",
                 items = git_submenu,
             },
             {
-                name = "Picker",
+                name = "󰉓 Picker",
                 hl = "ExBlue",
                 items = picker_submenu,
             },
             {
-                name = "Diagnostics",
+                name = "󰄭 Diagnostics",
                 hl = "ExBlue",
                 items = diagnostics_submenu,
             },
             {
-                name = "Harpoon",
+                name = "󰟢 Harpoon",
                 hl = "ExBlue",
                 items = harpoon_submenu,
             },
