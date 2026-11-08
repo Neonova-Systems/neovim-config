@@ -114,7 +114,8 @@ return {
             -- Open Trouble when an LSP attaches (shows diagnostics, references, etc.)
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(ev)
-                    vim.cmd("Trouble open")
+                    local ok, trouble = pcall(require, "trouble")
+                    if ok then trouble.open() end
                 end,
             })
         end,
