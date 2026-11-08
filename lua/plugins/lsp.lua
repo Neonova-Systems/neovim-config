@@ -5,6 +5,7 @@ return {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
         },
+        lazy = false,
         config = function()
             local servers = {
                 lua_ls = {

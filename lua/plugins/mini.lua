@@ -9,6 +9,7 @@ return {
             MiniFiles.reveal_cwd()
         end, desc = "Toggle into current file's directory" },
     },
+        lazy = false,
     config = function()
         require("mini.bufremove").setup()
         require("mini.comment").setup()
