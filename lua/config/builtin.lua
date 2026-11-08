@@ -1,8 +1,8 @@
 local built_in = { -- Create list of builtin
-    -- "netrw",
-    -- "netrwPlugin",
-    -- "netrwSettings",
-    -- "netrwFileHandlers",
+    "netrw",
+    "netrwPlugin",
+    "netrwSettings",
+    "netrwFileHandlers",
     "gzip",
     "zip",
     "zipPlugin",
