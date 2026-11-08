@@ -6,6 +6,14 @@ return {
         "debugloop/telescope-undo.nvim",
     },
     cmd = "Telescope",
+    keys = {
+        { "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Lists open buffers in current neovim" },
+        { "<leader>fh", function() require("telescope.builtin").oldfiles() end, desc = "Find last opened file" },
+        { "<leader>fw", function() require("telescope.builtin").live_grep() end, desc = "Find word" },
+        { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find files" },
+        { "<leader>fa", ":Telescope<CR>", desc = "Open Telescope" },
+        { "<leader>fu", function() require("telescope").extensions.undo.undo() end, desc = "Open Undotree" },
+    },
     config = function()
         local actions = require("telescope.actions")
         local action_state = require('telescope.actions.state')
@@ -56,10 +64,6 @@ return {
                 cycle_layout_list = { "horizontal", "vertical", "cursor", "bottom_pane" },
                 winblend = 0,
                 wrap_results = false,
-                prompt_prefix = '󰛡 ',
-                selection_caret = '  ',
-                entry_prefix = '  ',
-                multi_icon = '󰁘 ',
                 initial_mode = 'insert',
                 border = true,
                 path_display = { "truncate" },
@@ -81,12 +85,14 @@ return {
                     },
                     i = {
                         ["jk"] = { "<ESC>", type = "command" },
+                        ["<C-n>"] = actions.move_selection_next,
+                        ["<C-p>"] = actions.move_selection_previous,
                         ["<C-j>"] = actions.move_selection_next,
                         ["<C-k>"] = actions.move_selection_previous,
                         ["<M-p>"] = action_layout.toggle_preview,
                         ["<C-a>"] = actions.toggle_all,
                         ["<C-h>"] = "which_key",
-                        ["<C-n>"] = action_layout.cycle_layout_next,
+                        ["<C-r>"] = action_layout.cycle_layout_next,
                         ["<CR>"] = telescope_custom_actions.multi_selection_open,
                         ["<C-V>"] = telescope_custom_actions.multi_selection_open_vsplit,
                         ["<C-S>"] = telescope_custom_actions.multi_selection_open_split,
@@ -126,17 +132,5 @@ return {
         }
         require("telescope").load_extension("ui-select")
         require("telescope").load_extension("undo")
-
-        vim.keymap.set('n', '<leader>fb', function() require("telescope.builtin").buffers() end,
-            { noremap = true, silent = true, desc = 'Lists open buffers in current neovim' })
-        vim.keymap.set('n', '<leader>fh', function() require("telescope.builtin").oldfiles() end,
-            { noremap = true, silent = true, desc = 'Find last opened file' })
-        vim.keymap.set('n', '<leader>fw', function() require("telescope.builtin").live_grep() end,
-            { noremap = true, silent = true, desc = 'Find word' })
-        vim.keymap.set('n', '<leader>ff', function() require("telescope.builtin").find_files() end,
-            { noremap = true, silent = true, desc = 'Find files' })
-        vim.keymap.set('n', '<leader>fa', ':Telescope<CR>', { noremap = true, silent = true, desc = 'Open Telescope' })
-        vim.keymap.set('n', '<leader>fu', function() require("telescope").extensions.undo.undo() end,
-            { noremap = true, silent = true, desc = 'Open Undotree' })
     end,
 }
