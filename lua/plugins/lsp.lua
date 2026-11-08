@@ -9,8 +9,8 @@ return {
         lazy = false,
         config = function()
             require("trouble").setup({
-    warn_no_results = false, -- don't notify when the auto-opened panel finds nothing
-})
+                -- warn_no_results = false, -- don't notify when the auto-opened panel finds nothing
+            })
 
             -- Patch trouble's treesitter decoration provider: this Neovim
             -- version's vim.treesitter.highlighter lacks _on_win/_on_line,
@@ -119,22 +119,29 @@ return {
             vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol,
                 { desc = "Lists all symbols in the current workspace in the quickfix window." })
 
-            -- Open Trouble when an LSP attaches — shows definitions, references,
-            -- implementations, type definitions, declarations, and document symbols
-            -- in a right sidebar panel.
-            vim.api.nvim_create_autocmd("LspAttach", {
-                callback = function(ev)
-                    -- Workaround: trouble.nvim's treesitter decoration provider
-                    -- calls vim.treesitter.highlighter._on_win/_on_line which
-                    -- don't exist in this Neovim version. Stub them to no-ops.
-                    local ts = vim.treesitter.highlighter
-                    if not ts._on_win then ts._on_win = function() end end
-                    if not ts._on_line then ts._on_line = function() end end
+            -- Open Trouble diagnostics panel on the right sidebar when there are
+            -- diagnostics. Fires on LSP attach (after a short defer so the LSP
+            -- has populated the list) and again on every DiagnosticChanged.
+            local function open_trouble_diagnostics()
+                local diags = vim.diagnostic.get(0)
+                if #diags == 0 then
+                    return
+                end
+                local ok, trouble = pcall(require, "trouble")
+                if ok then
+                    trouble.open({ mode = "diagnostics", focus = false, win = { type = "split", position = "right" } })
+                end
+            end
 
-                    local ok, trouble = pcall(require, "trouble")
-                    if ok then
-                        trouble.open({ mode = "lsp", win = { type = "split", position = "right" } })
-                    end
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(args)
+                    vim.defer_fn(open_trouble_diagnostics, 200)
+                end,
+            })
+
+            vim.api.nvim_create_autocmd("DiagnosticChanged", {
+                callback = function()
+                    vim.defer_fn(open_trouble_diagnostics, 100)
                 end,
             })
         end,
@@ -172,10 +179,10 @@ return {
     {
         "lewis6991/hover.nvim",
         keys = {
-            { "K", function() require('hover').open() end, desc = 'hover.nvim (open)' },
-            { "gK", function() require('hover').enter() end, desc = 'hover.nvim (enter)' },
+            { "K",     function() require('hover').open() end,             desc = 'hover.nvim (open)' },
+            { "gK",    function() require('hover').enter() end,            desc = 'hover.nvim (enter)' },
             { "<C-p>", function() require('hover').switch('previous') end, desc = 'hover.nvim (previous source)' },
-            { "<C-n>", function() require('hover').switch('next') end, desc = 'hover.nvim (next source)' },
+            { "<C-n>", function() require('hover').switch('next') end,     desc = 'hover.nvim (next source)' },
         },
         config = function()
             require("hover").config({
@@ -192,13 +199,13 @@ return {
                     'hover.providers.fold_preview',
                     'hover.providers.highlight',
                 },
-              preview_opts = {
-                border = 'single'
-              },
-              -- Whether the contents of a currently open hover window should be moved
-              -- to a :h preview-window when pressing the hover keymap.
-              preview_window = false,
-              title = true,
+                preview_opts = {
+                    border = 'single'
+                },
+                -- Whether the contents of a currently open hover window should be moved
+                -- to a :h preview-window when pressing the hover keymap.
+                preview_window = false,
+                title = true,
             })
         end,
     }
