@@ -115,7 +115,7 @@ return {
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(ev)
                     local ok, trouble = pcall(require, "trouble")
-                    if ok then trouble.open() end
+                    if ok then trouble.open({ mode = "diagnostics" }) end
                 end,
             })
         end,
