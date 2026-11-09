@@ -119,9 +119,10 @@ return {
             vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol,
                 { desc = "Lists all symbols in the current workspace in the quickfix window." })
 
-            -- Open Trouble diagnostics panel on the right sidebar when there are
-            -- diagnostics. Fires on LSP attach (after a short defer so the LSP
-            -- has populated the list) and again on every DiagnosticChanged.
+            -- Open Trouble panels after LSP attaches — diagnostics on the bottom
+            -- split, LSP navigation modes (defs/refs/impls/types/decls/symbols)
+            -- on the right sidebar. Fires after a short defer so the LSP has
+            -- populated the diagnostic list before Trouble renders.
             local function open_trouble_diagnostics()
                 local diags = vim.diagnostic.get(0)
                 if #diags == 0 then
@@ -129,13 +130,29 @@ return {
                 end
                 local ok, trouble = pcall(require, "trouble")
                 if ok then
-                    trouble.open({ mode = "diagnostics", focus = false, win = { type = "split", position = "right" } })
+                    trouble.open({ mode = "diagnostics", focus = false, win = { type = "split", position = "bottom" } })
                 end
+            end
+
+            local function open_trouble_lsp()
+                local ok, trouble = pcall(require, "trouble")
+                if not ok then
+                    return
+                end
+                trouble.open({ mode = "lsp_definitions", focus = false, win = { type = "split", position = "right" } })
+                trouble.open({ mode = "lsp_references", focus = false, win = { type = "split", position = "right" } })
+                trouble.open({ mode = "lsp_implementations", focus = false, win = { type = "split", position = "right" } })
+                trouble.open({ mode = "lsp_type_definitions", focus = false, win = { type = "split", position = "right" } })
+                trouble.open({ mode = "lsp_declarations", focus = false, win = { type = "split", position = "right" } })
+                trouble.open({ mode = "lsp_document_symbols", focus = false, win = { type = "split", position = "right" } })
             end
 
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
-                    vim.defer_fn(open_trouble_diagnostics, 200)
+                    vim.defer_fn(function()
+                        open_trouble_diagnostics()
+                        open_trouble_lsp()
+                    end, 200)
                 end,
             })
 
