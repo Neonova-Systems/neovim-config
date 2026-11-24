@@ -5,6 +5,10 @@ return {
         event = "VeryLazy",
         config = function()
             require("mini.diff").setup({
+                view = {
+                    -- show whole reference part above whole buffer part, as in `git diff`
+                    overlay_style = "hunk",
+                },
                 mappings = {
                     apply = 'gh', -- Apply hunks inside a visual/operator region
                     reset = 'gH', -- Reset hunks inside a visual/operator region
@@ -13,10 +17,10 @@ return {
                     -- Works also in Visual mode if mapping differs from apply and reset
                     textobject = 'gh',
 
-                    -- Go to hunk range in corresponding direction
+                    -- Go to hunk range in corresponding direction (same as codediff.nvim)
                     goto_first = '[H',
-                    goto_prev = '[h',
-                    goto_next = ']h',
+                    goto_prev = '[c',
+                    goto_next = ']c',
                     goto_last = ']H',
                 },
             })
