@@ -11,9 +11,9 @@ vim.opt.autoindent = true                                           -- Copy inde
 vim.opt.smartindent = true                                          -- Do smart autoindenting when starting a new line.
 vim.opt.list = false                                                -- List mode: By default, show tabs as ">", trailing spaces as "-", and non-breakable space characters as "+". Useful to see the difference between tabs and spaces and for trailing blanks.
 vim.opt.scrolloff = 10                                              -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.sidescrolloff = 10                                          -- The minimal number of screen columns to keep to the left and to the right of the cursor if 'nowrap' is set.
-vim.opt.wildmenu = true                                             -- Enable 'enchanced mode' of command-line completion.
-vim.opt.wildmode = "list:full"                                      -- Completion mode that is used for the character specified with 'wildchar'.
+vim.opt.sidescrolloff = 8                                           -- The minimal number of screen columns to keep to the left and to the right of the cursor if 'nowrap' is set.
+vim.opt.wildmenu = false                                            -- Disabled: blink.cmp owns command-line completion; the builtin grid duplicated it and drew below the statusline with cmdheight=0.
+vim.opt.wildmode = "noselect:full"                                  -- No 'list' part, so no builtin list is drawn; 'noselect' inserts the first match, 'full' completes to the longest common prefix.
 vim.opt.wildignore = {'**/.git/*', '**/node_modules/*'}             -- A list of file patterns, a file that matches with one of these patterns is ignored when expanding wildcards.
 vim.opt.showcmd = true                                              -- Show (partial) command in the last line of the screen. Set this option off if your terminal is slow.
 vim.opt.breakindent = true                                          -- Every wrapped line will continue visually indented (same amount of space as the beginning of that line), thus preserving horizontal blocks of text.
@@ -43,7 +43,7 @@ vim.opt.fileencoding = "utf-8"                                      -- File-cont
 vim.opt.encoding = "utf-8"                                          -- String-encoding used internally and for RPC communication.
 vim.opt.clipboard:append("unnamedplus")                             -- Copy paste between nvim and everything else.
 vim.opt.isfname:append("@-@")                                       -- Allow for file names with @-@ in them
-vim.opt.completeopt = "menuone,noselect,nosort,fuzzy"             -- A comma separated list of options for Insert mode completion.
+vim.opt.completeopt = "menuone,noinsert,noselect"                   -- A comma separated list of options for Insert mode completion.
 vim.opt.shortmess = "filnxtToOFsSc"                                 -- This option helps to avoid all the hit-enter prompts caused by file messages, for example with CTRL-G, and to avoid some other messages. read :shortmess
 vim.opt.belloff = "all"                                             -- Specifies for which events the bell will not be rung. It is a commaseparated list of items.
 vim.opt.errorbells = false                                          -- Ring the bell (beep or screen flash) for error messages.
@@ -51,7 +51,7 @@ vim.opt.numberwidth = 5                                             -- Minimal n
 vim.opt.cindent = true                                              -- Get the amount of indent for line {lnum} according the C indenting rules, as with 'cindent'.
 vim.opt.undofile = true                                             -- When on, Vim automatically saves undo history to an undo file when writing a buffer to a file, and restores undo history from the same file on buffer read.
 vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"              -- Directory where the undo files will be stored.  The directory must exist and be writable.
-vim.opt.pumheight = 99                                              -- Maximum number of items to show in the popup menu
+vim.opt.pumheight = 10                                              -- Maximum number of items to show in the popup menu
 vim.opt.undolevels = 1000                                           -- Maximum number of changes that can be undone.
 vim.opt.linebreak = true                                            -- If on, Vim will wrap long lines at a character in 'breakat' rather than at the last character that fits on the screen.
 vim.opt.modeline = true                                             -- If 'modeline' is on 'modelines' gives the number of lines that is checked for set commands.
@@ -59,7 +59,7 @@ vim.opt.modelineexpr = false                                        -- When on a
 vim.opt.modelines = 5                                               -- If 'modeline' is on 'modelines' gives the number of lines that is checked for set commands.
 vim.opt.timeoutlen = 500                                            -- Time in milliseconds to wait for a mapped sequence to complete.
 vim.opt.filetype = ""                                               -- Set filetype fallback, if no filetype identified then use this filetype.
-vim.opt.foldmethod = "indent"                                       -- Set foldmethod to lines with equal indent form a fold.
+vim.opt.foldmethod = "expr"                                       -- Set foldmethod to lines with equal indent form a fold.
 vim.opt.showtabline = 0                                             -- Controls when the tab line is displayed. 0: never, 1: only if there are at least two tab pages, 2: always.
 vim.opt.hidden = true                                               -- When false a buffer is unloaded (including loss of undo information) when it is abandoned. When true a buffer becomes hidden when it is abandoned.
 vim.opt.swapfile = false                                            -- Don't use a swapfile for the buffer.
@@ -81,3 +81,10 @@ vim.opt.diffopt = [[filler,internal,algorithm:histogram,indent-heuristic,iwhite,
 vim.opt.listchars = { eol = "↲", tab = "▶ ", trail = "•", precedes = "«", extends = "»", nbsp = "␣", space = " " } -- Strings to use in 'list' mode and for the :list command. It is a comma-separated list of string settings.
 ---@diagnostic disable-next-line: inject-field
 vim.g.netrw_banner = 0                                                      -- Disable netrw banner
+
+-- Floating window, keyword and fold options
+vim.opt.winborder = "rounded"                                             -- Default border style of floating windows
+vim.opt.iskeyword:append("-")                                             -- Treat dash as a word character
+vim.opt.path:append("**")                                                 -- Include subdirectories in search
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"                      -- Use treesitter for folding
+vim.opt.foldlevel = 99                                                    -- Start with all folds open

@@ -86,3 +86,45 @@ end
 
 vim.keymap.set("n", "<leader>cp", function() copy_ref({}) end, { desc = "Copy file path" })
 vim.keymap.set("v", "<leader>cp", function() copy_ref({ visual = true }) end, { desc = "Copy file path with line range" })
+
+-- Do things without updating the registers
+vim.keymap.set("n", "x", '"_x', { desc = "Delete char without yanking" })
+vim.keymap.set("n", "<Leader>p", '"0p', { desc = "Paste from yank register" })
+vim.keymap.set("n", "<Leader>P", '"0P', { desc = "Paste from yank register before cursor" })
+vim.keymap.set("v", "<Leader>p", '"0p', { desc = "Paste from yank register" })
+vim.keymap.set("n", "<Leader>c", '"_c', { desc = "Change without yanking" })
+vim.keymap.set("n", "<Leader>C", '"_C', { desc = "Change to end of line without yanking" })
+vim.keymap.set("v", "<Leader>c", '"_c', { desc = "Change without yanking" })
+vim.keymap.set("v", "<Leader>C", '"_C', { desc = "Change without yanking" })
+vim.keymap.set("v", "<Leader>d", '"_d', { desc = "Delete to blackhole register" })
+vim.keymap.set("v", "<Leader>D", '"_D', { desc = "Delete to blackhole register" })
+vim.keymap.set("n", "<Leader>D", '"_D', { desc = "Delete to end of line into blackhole register" })
+
+-- Increment/decrement
+vim.keymap.set("n", "+", "<C-a>", { desc = "Increment number" })
+
+-- Disable continuations
+vim.keymap.set("n", "<Leader>O", "O<Esc>^Da", { noremap = true, silent = true, desc = "Add newline above without insert-mode" })
+
+-- New tab / split
+vim.keymap.set("n", "<tab>", ":tabnext<CR>", { noremap = true, silent = true, desc = "Next tab" })
+vim.keymap.set("n", "<s-tab>", ":tabprev<CR>", { noremap = true, silent = true, desc = "Previous tab" })
+vim.keymap.set("n", "ss", ":split<Return>", { noremap = true, silent = true, desc = "Horizontal split" })
+vim.keymap.set("n", "sv", ":vsplit<Return>", { noremap = true, silent = true, desc = "Vertical split" })
+
+-- Yank file path with line number
+vim.keymap.set("n", "<leader>yf", function()
+    require("utils.editor").yank_relative_path_with_line()
+end, { desc = "Yank relative path with line number" })
+vim.keymap.set("n", "<leader>yp", function()
+    require("utils.editor").yank_absolute_path_with_line()
+end, { desc = "Yank absolute path with line number" })
+
+-- Copy visual selection as a markdown codeblock
+vim.keymap.set("v", "<leader>cc", ":<C-u>lua require('utils.editor').copy_as_codeblock()<CR>",
+    { desc = "Copy as markdown codeblock" })
+
+-- Delete hidden buffers
+vim.keymap.set("n", "<leader>bd", function()
+    require("utils.editor").delete_hidden_buffers()
+end, { desc = "Delete hidden buffers" })

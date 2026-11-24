@@ -29,7 +29,7 @@ local config = {
         reset_packpath = true, -- reset the package path to improve startup time
         rtp = {
             reset = true,   -- reset the runtime path to $VIMRUNTIME and your config directory
-            paths = { "/home/xaxeric/Workspace/neovim-config-worktree" },     -- add any custom paths here that you want to includes in the rtp -@type string[]
+            paths = {},                                                      -- add any custom paths here that you want to includes in the rtp -@type string[]
             disabled_plugins = { ---@type string[] list any plugins you want to disable here
                 "gzip",
                 "zip",
@@ -98,7 +98,7 @@ local config = {
             reset_packpath = true, -- reset the package path to improve startup time
             rtp = {
                 reset = true,   -- reset the runtime path to $VIMRUNTIME and your config directory
-                paths = { "/home/xaxeric/Workspace/neovim-config-worktree" },     -- add any custom paths here that you want to includes in the rtp -@type string[]
+                paths = {},                                                      -- add any custom paths here that you want to includes in the rtp -@type string[]
                 disabled_plugins = { ---@type string[] list any plugins you want to disable here
                     "gzip",
                     "zip",
