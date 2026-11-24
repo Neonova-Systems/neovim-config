@@ -1,24 +1,16 @@
 return {
     "nvim-mini/mini.nvim",
-    dependencies = { "rafamadriz/friendly-snippets" },
-    keys = {
-        { "-", function() require("mini.files").open() end, desc = "Toggle mini file explorer" },
-        { "<leader>-", function()
-            local MiniFiles = require("mini.files")
-            MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
-            MiniFiles.reveal_cwd()
-        end, desc = "Reveal current file's directory" },
-    },
     lazy = false,
     config = function()
         require("mini.bufremove").setup()
         require("mini.comment").setup()
-        require("mini.pairs").setup()
-        require("mini.bracketed").setup()
+        require("mini.bracketed").setup({
+            -- Free the "c" suffix so mini.diff can own [c / ]c for hunk navigation.
+            comment = { suffix = "" },
+        })
         require("mini.ai").setup()
         require("mini.splitjoin").setup()
         require('mini.operators').setup()
-        require("mini.cmdline").setup({ autocomplete = { enable = true, delay = 150 }, autocorrect = { enable = false } })
         require("mini.surround").setup({
             -- Module mappings. Use `''` (empty string) to disable one.
             mappings = {
@@ -33,70 +25,8 @@ return {
                 suffix_next = 'n',
             },
         })
-        local MiniNotify = require("mini.notify")
-        MiniNotify.setup({
-            content = {
-                format = function(notif)
-                    local level = notif.level or "INFO"
-                    return string.format("[%s] %s", level, notif.msg)
-                end,
-            },
-        })
-        -- Per-level durations and highlight groups via make_notify
-        vim.notify = MiniNotify.make_notify({
-            ERROR = { duration = 10000, hl_group = "DiagnosticError" },
-            WARN  = { duration = 8000,  hl_group = "DiagnosticWarn"  },
-            INFO  = { duration = 5000,  hl_group = "DiagnosticInfo"  },
-            DEBUG = { duration = 3000,  hl_group = "DiagnosticHint" },
-            TRACE = { duration = 3000,  hl_group = "DiagnosticHint" },
-        })
 
         require("mini.extra").setup()
-        require("mini.cursorword").setup()
-        require("mini.jump2d").setup()
-        require('mini.indentscope').setup({ symbol = "│", options = { try_as_border = true }, })
-        require("mini.completion").setup({
-            lsp_completion = {
-                auto_setup = true,
-                process_time = function(items, base)
-                    return require("mini.completion").default_process_items(items, base, { filtersort = "fuzzy", })
-                end,
-            }
-        })
-        vim.keymap.set('i', '<Tab>', function()
-            return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>'
-        end, { expr = true })
-
-        vim.keymap.set('i', '<S-Tab>', function()
-            return vim.fn.pumvisible() == 1 and '<C-p>' or '<S-Tab>'
-        end, { expr = true })
-        require("mini.snippets").setup({
-            snippets = { require("mini.snippets").gen_loader.from_lang() }, -- loads friendly-snippets automatically
-            mappings = {
-                expand = '<C-j>',
-                jump_next = '<C-l>',
-                jump_prev = '<C-h>', -- Change or remove if overriding <C-h>
-            },
-        })
-
-        -- Map Insert Mode <C-BS> / <C-h> to delete word without snippet collision
-        vim.keymap.set('i', '<C-BS>', '<C-w>')
-        vim.keymap.set('i', '<C-h>', function()
-            -- Fallback to <C-w> if not active in snippet
-            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-w>', true, true, true), 'n', true)
-        end)
-        require("mini.snippets").start_lsp_server({ match = false })
-        local hipatterns = require('mini.hipatterns')
-        hipatterns.setup({
-            highlighters = {
-                -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
-                fixme     = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
-                hack      = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
-                todo      = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
-                note      = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
-                hex_color = hipatterns.gen_highlighter.hex_color(),
-            },
-        })
 
         vim.api.nvim_set_hl(0, "MiniPickMatchCurrent", { fg = "#000000", bg = "#325CC0", bold = true })
 
