@@ -1,21 +1,16 @@
 return {
-    'mcncl/alabaster.nvim',
+    "craftzdog/solarized-osaka.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-        require('alabaster').setup({
-            style = "dark",          -- "light" or "dark"
-            transparent = true,      -- Enable transparent background
-            italic_comments = false, -- Enable italic comments
+        require("solarized-osaka").setup({
+            style = "vivid",
+            transparent = true,
         })
 
-        vim.cmd.colorscheme('alabaster')
+        vim.cmd.colorscheme("solarized-osaka")
 
-        vim.keymap.set('n', '<leader>c', function()
-            require("alabaster").setup({ style = require("alabaster").config.style == "dark" and "light" or "dark" })
-        end, { noremap = true, silent = true, desc = "Toggle Alabaster style (light / dark)" })
-        vim.keymap.set('n', '<leader>ct',
-            '<cmd>lua require("alabaster").setup({ transparent = not require("alabaster").config.transparent })<CR>',
-            { noremap = true, silent = true, desc = "Toggle Alabaster transparency" })
+        require("mini.icons").setup()
+        require("mini.icons").mock_nvim_web_devicons()
     end,
 }
