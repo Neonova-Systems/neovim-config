@@ -1,6 +1,9 @@
 return {
     "esmuellert/codediff.nvim",
     lazy = false,
+    keys = {
+        { "<leader>go", "<cmd>CodeDiff<CR>", desc = "Diff working tree (codediff)" },
+    },
     config = function()
         require("codediff").setup({
             explorer = {

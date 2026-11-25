@@ -1,4 +1,4 @@
--- Shared action helpers, used by keybindings.lua, plugin configs, and the context menu
+-- Shared action helpers, used by keybindings.lua and plugin configs
 local M = {}
 
 function M.lsp_references_qf()
