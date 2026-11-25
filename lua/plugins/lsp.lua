@@ -228,13 +228,6 @@ return {
 				desc = "hover.nvim (enter)",
 			},
 			{
-				"<C-p>",
-				function()
-					require("hover").switch("previous")
-				end,
-				desc = "hover.nvim (previous source)",
-			},
-			{
 				"<C-n>",
 				function()
 					require("hover").switch("next")
