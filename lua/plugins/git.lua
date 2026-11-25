@@ -1,36 +1,5 @@
 return {
     {
-        "nvim-mini/mini.diff",
-        version = false,
-        event = "VeryLazy",
-        config = function()
-            require("mini.diff").setup({
-                view = {
-                    -- show whole reference part above whole buffer part, as in `git diff`
-                    overlay_style = "hunk",
-                },
-                mappings = {
-                    apply = 'gh', -- Apply hunks inside a visual/operator region
-                    reset = 'gH', -- Reset hunks inside a visual/operator region
-
-                    -- Hunk range textobject to be used inside operator
-                    -- Works also in Visual mode if mapping differs from apply and reset
-                    textobject = 'gh',
-
-                    -- Go to hunk range in corresponding direction (same as codediff.nvim)
-                    goto_first = '[H',
-                    goto_prev = '[c',
-                    goto_next = ']c',
-                    goto_last = ']H',
-                },
-            })
-
-            local diff = require("mini.diff")
-            -- Toggle persistent contextual text area overlay
-            vim.keymap.set("n", "<leader>go", function() diff.toggle_overlay(0) end, { desc = "Toggle Git Diff Overlay" })
-        end,
-    },
-    {
         "nvim-mini/mini-git",
         version = false,
         event = "VeryLazy",

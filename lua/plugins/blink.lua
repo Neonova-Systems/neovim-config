@@ -107,5 +107,5 @@ return {
             })
         end,
     },
-    -- mini.diff lives in lua/plugins/git.lua (single owner, keeps [c / ]c hunk nav).
+    -- Hunk signs/nav live in lua/plugins/gitsigns.lua; mini-git lives in lua/plugins/git.lua.
 }

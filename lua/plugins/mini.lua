@@ -5,7 +5,7 @@ return {
         require("mini.bufremove").setup()
         require("mini.comment").setup()
         require("mini.bracketed").setup({
-            -- Free the "c" suffix so mini.diff can own [c / ]c for hunk navigation.
+            -- Free the "c" suffix so gitsigns can own [c / ]c for hunk navigation.
             comment = { suffix = "" },
         })
         require("mini.ai").setup()
