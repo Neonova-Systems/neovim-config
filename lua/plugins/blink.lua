@@ -53,6 +53,15 @@ return {
                 snippets = {
                     preset = "default",
                 },
+                sources = {
+                    transform_items = function(ctx, items)
+                        -- flutter-icons is ft=dart; do not force-load it for other buffers.
+                        if vim.bo.filetype ~= "dart" then return items end
+                        local ok, icons = pcall(require, "flutter-icons")
+                        if not ok then return items end
+                        return icons.transform_items(ctx, items)
+                    end,
+                },
                 completion = {
                     accept = {
                         -- experimental auto-brackets support
@@ -89,7 +98,8 @@ return {
                     },
                 },
                 keymap = {
-                    preset = "enter",
+                    preset = "super-tab",
+                    ["<CR>"] = { "accept", "fallback" },
                     ["c-y"] = { "select_and_accept" },
                 },
                 appearance = {

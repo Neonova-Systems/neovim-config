@@ -15,6 +15,7 @@ return {
             notifier = { enabled = true },
             statuscolumn = { enabled = true },
             words = { enabled = true },
+            image = { enabled = true },
             lazygit = {
                 enabled = true,
                 configure = true, -- auto-sets nvim-remote preset & syncs theme
