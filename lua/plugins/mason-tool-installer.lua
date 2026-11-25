@@ -17,7 +17,6 @@ return {
                 "oxfmt",
                 "tailwindcss-language-server",
                 "vtsls",
-                "copilot-language-server",
                 "rust-analyzer",
             },
             auto_update = false,
