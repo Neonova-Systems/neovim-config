@@ -12,6 +12,8 @@ return {
         { "<leader>fh", function() require("telescope.builtin").help_tags() end, desc = "Help Tags" },
         { "<leader>fw", function() require("telescope.builtin").live_grep() end, desc = "Find word" },
         { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find files" },
+        { "<C-o>", function() require("telescope.builtin").find_files() end, desc = "Find files (Ctrl+O)" },
+        { "<C-S-o>", function() require("telescope.builtin").live_grep() end, desc = "Live grep (Ctrl+Shift+O)" },
         { "<leader>fa", ":Telescope<CR>", desc = "Open Telescope" },
         { "<leader>fu", function() require("telescope").extensions.undo.undo() end, desc = "Open Undotree" },
 
@@ -39,13 +41,21 @@ return {
         local telescope_custom_actions = {}
         function telescope_custom_actions._multiopen(prompt_bufnr, open_cmd)
             local picker = action_state.get_current_picker(prompt_bufnr)
-            local selected_entry = action_state.get_selected_entry()
-            local num_selections = #picker:get_multi_selection()
-            if not num_selections or num_selections <= 1 then
-                actions.add_selection(prompt_bufnr)
+            local selections = picker:get_multi_selection()
+
+            -- With no multi-selection, fall back to the entry under the cursor.
+            if #selections == 0 then
+                local entry = action_state.get_selected_entry()
+                if entry then selections = { entry } end
             end
-            actions.send_selected_to_qflist(prompt_bufnr)
-            vim.cmd("cfdo " .. open_cmd)
+
+            actions.close(prompt_bufnr)
+            for _, entry in ipairs(selections) do
+                local path = entry.path or (type(entry.value) == "string" and entry.value)
+                if path then
+                    vim.cmd(open_cmd .. " " .. vim.fn.fnameescape(path))
+                end
+            end
         end
 
         function telescope_custom_actions.multi_selection_open_vsplit(prompt_bufnr)
