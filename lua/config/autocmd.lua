@@ -56,3 +56,29 @@ vim.filetype.add({
         mjml = "html",
     },
 })
+
+-- Kitty: mark this window as an editor so kitty releases keys that conflict
+-- with Neovim (ctrl+shift+o is kitty's URL-hints shortcut). kitty.conf uses
+-- --when-focus-on var:in_editor to unmap that key only while this is set.
+if vim.env.KITTY_WINDOW_ID then
+    local function kitty_set_editor(value)
+        local escaped = "\x1b]1337;SetUserVar=in_editor"
+            .. (value and ("=" .. value) or "")
+            .. "\x07"
+        -- nvim_ui_send exists on the TTY UI; headless has no UI, so fall back.
+        local ok = pcall(vim.api.nvim_ui_send, escaped)
+        if not ok then
+            io.stdout:write(escaped)
+        end
+    end
+
+    local kitty_group = vim.api.nvim_create_augroup("KittyEditorVar", { clear = true })
+    vim.api.nvim_create_autocmd({ "VimEnter", "VimResume", "UIEnter" }, {
+        group = kitty_group,
+        callback = function() kitty_set_editor("MQ==") end, -- base64("1")
+    })
+    vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
+        group = kitty_group,
+        callback = function() kitty_set_editor(nil) end,
+    })
+end
